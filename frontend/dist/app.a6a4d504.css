@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+body #app {
+  width: 100%;
+  height: 100%;
+}
+body #app .app {
+  display: flex;
+  flex-flow: column;
+  border: solid black;
+  width: 100%;
+  height: 100%;
+}
+body #app .app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 15%;
+  width: 100%;
+  border: solid black;
+}
+body #app .app__header--name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  margin-left: 20px;
+  border: solid black;
+}
+body #app .app__header--name:hover {
+  cursor: pointer;
+}
+body #app .app__header--name:active {
+  transform: scale(0.99);
+}
+body #app .app__body {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  border: solid black;
+}
+body #app .app__footer {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  border: solid black;
+  font-size: 20px;
+}
+body #app .app__footer a {
+  margin: 10px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: red;
+  font-weight: bold;
+}
+body #app .app__footer a:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+/*# sourceMappingURL=/app.a6a4d504.css.map */
