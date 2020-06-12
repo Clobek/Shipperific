@@ -11,14 +11,52 @@ const App = (props) => {
 
     const [body, setBody] = useState('Home')
 
-    const content = () =>{
-        if(body === 'Home'){
-            return <Home />
-        } else if(body === 'Tracking'){
-            return <Tracking />
+    const [formData, setFormData] = useState({
+        tracking_number: '',
+        carrier: '',
+    });
+
+    const [myPackage, setMyPackage] = useState(null)
+
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value.toLowerCase()});
+    };
+
+    const handleTrack = async () =>{
+        event.preventDefault();
+        try{
+            const request = await fetch(`http://localhost:3000/api/${formData.tracking_number}/${formData.carrier}`)
+            const response = await request.json()
+            await setMyPackage(response.items[0])
+        } catch(error){
+            console.error(error)
         }
     }
 
+    // const handleTrack = () =>{
+    //     fetch(`http://localhost:3000/api/${formData.tracking_number}/${formData.carrier}`, {
+    //         mathod: 'GET',
+    //         headers: {'Content-Type': 'application/json'}
+    //     })
+    //     .then((response)=> response.json())
+    //     .then((foundPackage)=>{
+    //         setMyPackage(foundPackage.items[0])
+    //         console.log(foundPackage.items[0])
+    //     })
+    // }
+
+    const content = () =>{
+        if(body === 'Home'){
+            return <Home 
+            setBody={setBody} 
+            handleTrack={handleTrack} 
+            formData={setFormData} 
+            handleChange={handleChange}
+            />
+        } else if(body === 'Tracking'){
+            return <Tracking myPackage={myPackage}/>
+        }
+    }
     return (
         <div className="app">
             <Header setBody={setBody}/>

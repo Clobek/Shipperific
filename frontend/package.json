@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "parcel index.html --port 3000 --open",
+        "dev": "parcel index.html --port 1985 --open",
         "build": "parcel build index.html"
     },
     "keywords": [],

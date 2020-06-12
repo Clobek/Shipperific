@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export default (props) => {
     return (
         <div className="app__body">
-            <h1>Tracking</h1>
+            {props.myPackage ? `${props.myPackage.status}` : <div className="center"><div className="loader"></div></div>}
         </div>
     );
 };
