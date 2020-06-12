@@ -29228,15 +29228,15 @@ var _default = function _default(props) {
     href: "https://www.linkedin.com/in/bryce-belock/",
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Bryce Belock"), " /", /*#__PURE__*/_react.default.createElement("a", {
+  }, "Bryce Belock (Front-End+CSS)"), " /", /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.linkedin.com/in/jonathan-rhymes/",
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Jonathan Rhymes"), " /", /*#__PURE__*/_react.default.createElement("a", {
+  }, "Jonathan Rhymes (API+Routes)"), " /", /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.linkedin.com/in/taylor-yip/",
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Taylor Yip"));
+  }, "Taylor Yip (Token+Auths)"));
 };
 
 exports.default = _default;
@@ -29268,7 +29268,8 @@ var _default = function _default(props) {
     id: "trackingNumber",
     name: "tracking_number",
     value: props.formData.tracking_number,
-    onChange: props.handleChange
+    onChange: props.handleChange,
+    required: true
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "carrier"
   }, "Carrier:"), /*#__PURE__*/_react.default.createElement("input", {
@@ -29276,11 +29277,12 @@ var _default = function _default(props) {
     id: "carrier",
     name: "carrier",
     value: props.formData.carrier,
-    onChange: props.handleChange
+    onChange: props.handleChange,
+    required: true
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--track"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    type: "button",
+    type: "submit",
     onClick: function onClick() {
       props.setBody('Tracking'), props.handleTrack();
     }
@@ -29305,10 +29307,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = function _default(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body"
-  }, props.myPackage ? "".concat(props.myPackage.status) : /*#__PURE__*/_react.default.createElement("div", {
+  }, props.myPackage ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "package"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "package__tracking-number"
+  }, "Tracking Number: ", props.myPackage.tracking_number), /*#__PURE__*/_react.default.createElement("div", {
+    className: "package__carrier-code"
+  }, "Carrier: ", props.myPackage.carrier_code.toUpperCase()), /*#__PURE__*/_react.default.createElement("div", {
+    className: "package__status"
+  }, "Status: ", props.myPackage.status), /*#__PURE__*/_react.default.createElement("div", {
+    className: "package__container"
+  }, props.myPackage.origin_info.trackinfo.map(function (item, index) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "package__container--item",
+      key: index
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "package__container--item--location"
+    }, "Location:", /*#__PURE__*/_react.default.createElement("br", null), item.Details), /*#__PURE__*/_react.default.createElement("div", {
+      className: "package__container--item--status"
+    }, "Status:", /*#__PURE__*/_react.default.createElement("br", null), item.StatusDescription), /*#__PURE__*/_react.default.createElement("div", {
+      className: "package__container--item--date"
+    }, "Date:", /*#__PURE__*/_react.default.createElement("br", null), item.Date), /*#__PURE__*/_react.default.createElement("div", {
+      className: "package__container--item--checkpoint"
+    }, "Checkpoint:", /*#__PURE__*/_react.default.createElement("br", null), item.checkpoint_status));
+  }))) : /*#__PURE__*/_react.default.createElement("div", {
     className: "center"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "loader"
+    className: "loading"
   })));
 };
 
@@ -29550,7 +29575,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44383" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39493" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

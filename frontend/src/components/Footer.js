@@ -12,9 +12,9 @@ export default (props) => {
                 <a className="code__a" href="https://github.com/Clobek/Shipperific" target="_blank" rel="noopener noreferrer">CODE</a>
             </div>
              by Team Codarific:
-            <a href="https://www.linkedin.com/in/bryce-belock/" target="_blank" rel="noopener noreferrer">Bryce Belock</a> /
-            <a href="https://www.linkedin.com/in/jonathan-rhymes/" target="_blank" rel="noopener noreferrer">Jonathan Rhymes</a> /
-            <a href="https://www.linkedin.com/in/taylor-yip/" target="_blank" rel="noopener noreferrer">Taylor Yip</a>
+            <a href="https://www.linkedin.com/in/bryce-belock/" target="_blank" rel="noopener noreferrer">Bryce Belock (Front-End+CSS)</a> /
+            <a href="https://www.linkedin.com/in/jonathan-rhymes/" target="_blank" rel="noopener noreferrer">Jonathan Rhymes (API+Routes)</a> /
+            <a href="https://www.linkedin.com/in/taylor-yip/" target="_blank" rel="noopener noreferrer">Taylor Yip (Token+Auths)</a>
         </div>
     );
 };

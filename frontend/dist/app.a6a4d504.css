@@ -24,7 +24,6 @@ body #app {
 body #app .app {
   display: flex;
   flex-flow: column;
-  border: solid black;
   width: 100%;
   height: 100%;
 }
@@ -42,7 +41,6 @@ body #app .app__header--name {
   align-items: center;
   font-size: calc(1vw + 5vh);
   margin-left: 20px;
-  border: solid black;
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;
@@ -67,7 +65,6 @@ body #app .app__body {
   flex-flow: column;
   height: 75%;
   width: 100%;
-  border: solid black;
 }
 body #app .app__body--content {
   display: flex;
@@ -106,6 +103,58 @@ body #app .app__body--content--track button {
   width: 80%;
   height: 35%;
 }
+body #app .app__body .package {
+  display: flex;
+  flex-flow: column;
+  border: solid black;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+body #app .app__body .package__tracking-number, body #app .app__body .package__carrier-code, body #app .app__body .package__status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  font-size: calc(0.50vw + 2vh);
+  text-transform: capitalize;
+  margin-top: 20px;
+}
+body #app .app__body .package__container {
+  display: flex;
+  flex-flow: column;
+  height: auto;
+  width: 100%;
+  font-size: calc(0.33vw + 1.77vh);
+}
+body #app .app__body .package__container--item {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  width: 80%;
+  height: 100%;
+  border: solid black;
+}
+body #app .app__body .package__container--item--checkpoint {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 80%;
+  text-transform: capitalize;
+  margin: 10px auto;
+  border-bottom: solid black 1px;
+}
+body #app .app__body .package__container--item--location, body #app .app__body .package__container--item--status, body #app .app__body .package__container--item--date {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 80%;
+  margin: 10px auto;
+  border-bottom: solid black 1px;
+}
 body #app .app__footer {
   display: flex;
   flex-flow: row;
@@ -117,6 +166,7 @@ body #app .app__footer {
   font-size: calc(0.33vw + 1.77vh);
 }
 body #app .app__footer a {
+  text-align: center;
   margin: 10px;
   font-size: calc(0.33vw + 1.77vh);
   letter-spacing: 1px;
@@ -169,7 +219,7 @@ body #app .app__footer a:hover {
   width: 100%;
   height: 100%;
 }
-.center .loader {
+.center .loading {
   z-index: 1;
   border-radius: 50%;
   border-top: solid ghostwhite 16px;

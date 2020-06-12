@@ -28,7 +28,6 @@ body {
         .app {
             display: flex;
             flex-flow: column;
-            border: solid black;
             width: 100%;
             height: 100%;
             &__header{
@@ -44,7 +43,6 @@ body {
                     align-items: center;
                     font-size: calc(1vw + 5vh);
                     margin-left: 20px;
-                    border: solid black;
                     @include disable-selection;
                     &:hover{
                         cursor: pointer;
@@ -59,7 +57,6 @@ body {
                 flex-flow: column;
                 height: 75%;
                 width: 100%;
-                border: solid black;
                 &--content{
                     display: flex;
                     flex-flow: row;
@@ -97,6 +94,58 @@ body {
                         }
                     }
                 }
+                .package{
+                    display: flex;
+                    flex-flow: column;
+                    border: solid black;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    &__tracking-number, &__carrier-code, &__status{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: auto;
+                        width: 100%;
+                        font-size: calc(0.50vw + 2vh);
+                        text-transform: capitalize;
+                        margin-top: 20px;
+                    }
+                    &__container{
+                        display: flex;
+                        flex-flow: column;
+                        height: auto;
+                        width: 100%;
+                        font-size: calc(0.33vw + 1.77vh);
+                        &--item{
+                            display: flex;
+                            flex-flow: column;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 20px auto;
+                            width: 80%;
+                            height: 100%;
+                            border: solid black;
+                            &--checkpoint{
+                                display: flex;
+                                justify-content: center;
+                                text-align: center;
+                                width: 80%;
+                                text-transform: capitalize;
+                                margin: 10px auto;
+                                border-bottom: solid black 1px;
+                            }
+                            &--location, &--status, &--date{
+                                display: flex;
+                                justify-content: center;
+                                text-align: center;
+                                width: 80%;
+                                margin: 10px auto;
+                                border-bottom: solid black 1px;
+                            }
+                        }
+                    }
+                }
             }
             &__footer{
                 display: flex;
@@ -108,6 +157,7 @@ body {
                 border: solid black;
                 font-size: calc(0.33vw + 1.77vh);
                 a{
+                    text-align: center;
                     margin: 10px;
                     font-size: calc(0.33vw + 1.77vh);
                     letter-spacing: 1px;
@@ -165,7 +215,7 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    .loader {
+    .loading {
         z-index: 1;
         border-radius: 50%;
         border-top: solid ghostwhite 16px;

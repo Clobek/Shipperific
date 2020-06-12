@@ -59,7 +59,7 @@ const App = (props) => {
     }
     return (
         <div className="app">
-            <Header setBody={setBody}/>
+            <Header setBody={setBody} />
             {content()}
             <Footer />
         </div>

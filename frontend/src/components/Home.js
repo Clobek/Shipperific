@@ -13,6 +13,7 @@ export default (props) => {
                     name="tracking_number"
                     value={props.formData.tracking_number}
                     onChange={props.handleChange}
+                    required
                     />
                     <label htmlFor="carrier">Carrier:</label>
                     <input 
@@ -21,10 +22,11 @@ export default (props) => {
                     name="carrier"
                     value={props.formData.carrier}
                     onChange={props.handleChange}
+                    required
                     />
                 </div>
                 <div className="app__body--content--track">
-                    <button type="button" onClick={()=>{props.setBody('Tracking'), props.handleTrack()}}>Track</button>
+                    <button type="submit" onClick={()=>{props.setBody('Tracking'), props.handleTrack()}}>Track</button>
                 </div>        
             </div>
         </div>
