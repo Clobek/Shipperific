@@ -26,7 +26,7 @@ export default (props) => {
                     />
                 </div>
                 <div className="app__body--content--track">
-                    <button type="submit" onClick={()=>{props.setBody('Tracking'), props.handleTrack()}}>Track</button>
+                    <button type="submit" onClick={()=>{props.setBody('Tracking'), props.handleTrack()}}><i class="fas fa-box"></i><br/>Search</button>
                 </div>        
             </div>
         </div>

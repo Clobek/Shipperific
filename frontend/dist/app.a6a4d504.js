@@ -29286,7 +29286,9 @@ var _default = function _default(props) {
     onClick: function onClick() {
       props.setBody('Tracking'), props.handleTrack();
     }
-  }, "Track"))));
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    class: "fas fa-box"
+  }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
 };
 
 exports.default = _default;
@@ -29315,7 +29317,11 @@ var _default = function _default(props) {
     className: "package__carrier-code"
   }, "Carrier: ", props.myPackage.carrier_code.toUpperCase()), /*#__PURE__*/_react.default.createElement("div", {
     className: "package__status"
-  }, "Status: ", props.myPackage.status), /*#__PURE__*/_react.default.createElement("div", {
+  }, "Status: ", props.myPackage.status), props.myPackage.status == 'delivered' ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "package__status--icon"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    class: "far fa-check-circle"
+  })) : '', /*#__PURE__*/_react.default.createElement("div", {
     className: "package__container"
   }, props.myPackage.origin_info.trackinfo.map(function (item, index) {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -29575,7 +29581,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39493" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39261" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
