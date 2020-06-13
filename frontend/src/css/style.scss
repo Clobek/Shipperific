@@ -54,15 +54,44 @@ body {
                     justify-content: center;
                     align-items: center;
                     font-size: calc(1vw + 5vh);
-                    margin-left: 20px;
                     font-family: 'Montserrat', sans-serif;
                     text-shadow: 0 2px 5px var(--shadow);
                     @include disable-selection;
+                    width: 30%;
+                    height: 100%;
                     &:hover{
                         cursor: pointer;
                     }
                     &:active{
                         transform: scale(0.99);
+                    }
+                }
+                &--nav{
+                    display: flex;
+                    justify-content: flex-end;
+                    width: 70%;
+                    height: 100%;
+                    &--left{
+                        font-size: calc(0.33vw + 1.77vh);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 50%;
+                        height: 100%;
+                        &:hover{
+                            cursor: pointer;
+                        }
+                    }
+                    &--right{
+                        font-size: calc(0.33vw + 1.77vh);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 50%;
+                        height: 100%;
+                        &:hover{
+                            cursor: pointer;
+                        }
                     }
                 }
             }
@@ -91,14 +120,32 @@ body {
                         width: 80%;
                         height: 100%;
                         font-size: calc(2vw + 1.5vh);
-                        label{
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        .top{
+                            display: flex;
+                            flex-flow: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 50%;
+                            padding-top: calc(1.25vw + 6.25vh);
+                        }
+                        .bottom{
+                            display: flex;
+                            flex-flow: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 50%;
+                            padding-bottom: calc(2.5vw + 12.5vh);
+                        }
+                        .bottom > label, .top > label{
                             display: flex;
                             justify-content: center;
                             width: 80%;
-                            margin-top: calc(0.33vw + 1.77vh);
                         }
-                        input{
-                            margin-bottom: calc(0.33vw + 1.77vh);
+                        .bottom > input, .top > input{
                             font-size: calc(1vw + .77vh);
                             width: 80%;
                             text-align: center;
@@ -166,7 +213,7 @@ body {
                                 height: calc(2vw + 1.5vh);
                                 width: 100%;
                                 color: green;
-                                margin-top: 20px;
+                                margin-top: calc(0.33vw + 1.77vh);
                             }
                         }
                     }
@@ -221,7 +268,7 @@ body {
                 background-color: var(--primary);
                 a{
                     text-align: center;
-                    margin: 10px;
+                    margin: calc(0.17vw + .8vh);
                     font-size: calc(0.33vw + 1.77vh);
                     letter-spacing: 1px;
                     text-decoration: none;
@@ -266,7 +313,7 @@ body {
         a{
             display: inline-block;
             padding: 2px;
-
+            background-color: var(--tertiary)
         }
     }
 }

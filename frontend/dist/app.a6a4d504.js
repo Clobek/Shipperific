@@ -29162,8 +29162,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
-
 var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
@@ -29171,26 +29169,34 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = function _default(props) {
-  var _React$useState = _react.default.useState({
-    tracking_number: '',
-    carrier: ''
-  }),
-      _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
-      formData = _React$useState2[0],
-      setFormData = _React$useState2[1];
-
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--name",
     onClick: function onClick() {
-      props.setBody('Home'), setFormData();
+      props.setBody('Home'), props.setFormData(props.initial), props.setMyPackage(props.initial);
     }
-  }, "Shipperific"));
+  }, "Shipperific"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--left"
+  }, props.user ? /*#__PURE__*/_react.default.createElement("div", null, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--left--signUp",
+    onClick: function onClick() {
+      props.setBody('Sign Up');
+    }
+  }, "Sign Up")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--right"
+  }, props.user ? /*#__PURE__*/_react.default.createElement("div", null, "Sign out") : /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--left-signIn",
+    onClick: function onClick() {
+      props.setBody('Sign In');
+    }
+  }, "Sign in"))));
 };
 
 exports.default = _default;
-},{"@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"src/components/Footer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"src/components/Footer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29261,25 +29267,29 @@ var _default = function _default(props) {
     className: "app__body--content"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--input"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "top"
   }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "trackingNumber"
   }, "Tracking Number:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     id: "trackingNumber",
     name: "tracking_number",
-    value: props.formData.tracking_number,
+    value: props.setFormData.tracking_number,
     onChange: props.handleChange,
     required: true
-  }), /*#__PURE__*/_react.default.createElement("label", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "bottom"
+  }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "carrier"
   }, "Carrier:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     id: "carrier",
     name: "carrier",
-    value: props.formData.carrier,
+    value: props.setFormData.carrier,
     onChange: props.handleChange,
     required: true
-  })), /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--track"
   }, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit",
@@ -29287,7 +29297,7 @@ var _default = function _default(props) {
       props.setBody('Tracking'), props.handleTrack();
     }
   }, /*#__PURE__*/_react.default.createElement("i", {
-    class: "fas fa-box"
+    className: "fas fa-box"
   }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
 };
 
@@ -29320,7 +29330,7 @@ var _default = function _default(props) {
   }, "Status: ", props.myPackage.status), props.myPackage.status == 'delivered' ? /*#__PURE__*/_react.default.createElement("div", {
     className: "package__status--icon"
   }, /*#__PURE__*/_react.default.createElement("i", {
-    class: "far fa-check-circle"
+    className: "far fa-check-circle"
   })) : '', /*#__PURE__*/_react.default.createElement("div", {
     className: "package__container"
   }, props.myPackage.origin_info.trackinfo.map(function (item, index) {
@@ -29341,6 +29351,106 @@ var _default = function _default(props) {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "loading"
   })));
+};
+
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"src/components/SignUp.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(props) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content--input"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "username"
+  }, "Username"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    id: "username",
+    name: "username",
+    onChange: props.handleUser,
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "username"
+  }, "Password"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password",
+    onChange: props.handleUser,
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content--track"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit",
+    onClick: function onClick() {
+      props.setBody('Home'), props.signUp();
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-box"
+  }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
+};
+
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"src/components/SignIn.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(props) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content--input"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "username"
+  }, "Username"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    id: "username",
+    name: "username",
+    onChange: props.handleUser,
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "username"
+  }, "Password"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password",
+    onChange: props.handleUser,
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--content--track"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit",
+    onClick: function onClick() {
+      props.setBody('Tracking'), props.signIn();
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-box"
+  }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
 };
 
 exports.default = _default;
@@ -29439,6 +29549,10 @@ var _Home = _interopRequireDefault(require("./components/Home.js"));
 
 var _Tracking = _interopRequireDefault(require("./components/Tracking.js"));
 
+var _SignUp = _interopRequireDefault(require("./components/SignUp.js"));
+
+var _SignIn = _interopRequireDefault(require("./components/SignIn.js"));
+
 require("./css/style.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29464,13 +29578,25 @@ var App = function App(props) {
       formData = _useState4[0],
       setFormData = _useState4[1];
 
-  var _useState5 = useState(null),
+  var _useState5 = useState({
+    username: '',
+    password: ''
+  }),
       _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
-      myPackage = _useState6[0],
-      setMyPackage = _useState6[1];
+      userData = _useState6[0],
+      setUserData = _useState6[1];
+
+  var _useState7 = useState(null),
+      _useState8 = (0, _slicedToArray2.default)(_useState7, 2),
+      myPackage = _useState8[0],
+      setMyPackage = _useState8[1];
 
   var handleChange = function handleChange(event) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value.toLowerCase())));
+  };
+
+  var handleUser = function handleUser(event) {
+    setUserData(_objectSpread(_objectSpread({}, userData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value)));
   };
 
   var handleTrack = /*#__PURE__*/function () {
@@ -29515,30 +29641,149 @@ var App = function App(props) {
     return function handleTrack() {
       return _ref.apply(this, arguments);
     };
-  }(); // const handleTrack = () =>{
-  //     fetch(`http://localhost:3000/api/${formData.tracking_number}/${formData.carrier}`, {
-  //         mathod: 'GET',
-  //         headers: {'Content-Type': 'application/json'}
+  }();
+
+  var token;
+
+  var login = /*#__PURE__*/function () {
+    var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var response, newToken;
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!window.localStorage.getItem('token')) {
+                _context2.next = 5;
+                break;
+              }
+
+              console.log('token exists');
+              token = JSON.parse(window.localStorage.getItem('token'));
+              _context2.next = 15;
+              break;
+
+            case 5:
+              console.log('no token');
+              _context2.next = 8;
+              return fetch('http://localhost:3000/login', {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+
+            case 8:
+              response = _context2.sent;
+              _context2.next = 11;
+              return response.json();
+
+            case 11:
+              newToken = _context2.sent;
+              console.log(newToken);
+              token = newToken;
+              window.localStorage.setItem('token', JSON.stringify(token));
+
+            case 15:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function login() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var signUp = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+      var request, response;
+      return _regenerator.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log('running function');
+              _context3.prev = 1;
+              _context3.next = 4;
+              return fetch('http://localhost:3000/signup', {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+
+            case 4:
+              request = _context3.sent;
+              _context3.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context3.sent;
+              console.log(response);
+              _context3.next = 14;
+              break;
+
+            case 11:
+              _context3.prev = 11;
+              _context3.t0 = _context3["catch"](1);
+              console.error(_context3.t0);
+
+            case 14:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[1, 11]]);
+    }));
+
+    return function signUp() {
+      return _ref3.apply(this, arguments);
+    };
+  }(); // const test = async () => {
+  //     const response = await fetch('http://localhost:3000/test', {
+  //         method: "GET",
+  //         headers: {
+  //             "Authorization": `bearer ${token}`
+  //         }
   //     })
-  //     .then((response)=> response.json())
-  //     .then((foundPackage)=>{
-  //         setMyPackage(foundPackage.items[0])
-  //         console.log(foundPackage.items[0])
-  //     })
+  //     const result = await response.json()
+  //     console.log(result)
   // }
 
+
+  var logout = function logout() {
+    token = '';
+    window.localStorage.removeItem('token');
+  };
 
   var content = function content() {
     if (body === 'Home') {
       return /*#__PURE__*/_react.default.createElement(_Home.default, {
         setBody: setBody,
         handleTrack: handleTrack,
-        formData: setFormData,
+        setFormData: setFormData,
         handleChange: handleChange
       });
     } else if (body === 'Tracking') {
       return /*#__PURE__*/_react.default.createElement(_Tracking.default, {
-        myPackage: myPackage
+        myPackage: myPackage,
+        setBody: setBody,
+        setFormData: setFormData
+      });
+    } else if (body === 'Sign Up') {
+      return /*#__PURE__*/_react.default.createElement(_SignUp.default, {
+        setBody: setBody,
+        handleUser: handleUser,
+        signUp: signUp
+      });
+    } else if (body === 'Sign In') {
+      return /*#__PURE__*/_react.default.createElement(_SignIn.default, {
+        setBody: setBody,
+        handleUser: handleUser,
+        signIn: login
       });
     }
   };
@@ -29546,14 +29791,18 @@ var App = function App(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
   }, /*#__PURE__*/_react.default.createElement(_Header.default, {
-    setBody: setBody
+    setBody: setBody,
+    login: login,
+    logout: logout,
+    setFormData: setFormData,
+    setMyPackage: setMyPackage
   }), content(), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
 };
 
 var target = document.getElementById('app');
 
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(App, null), target);
-},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/Header.js":"src/components/Header.js","./components/Footer.js":"src/components/Footer.js","./components/Home.js":"src/components/Home.js","./components/Tracking.js":"src/components/Tracking.js","./css/style.scss":"src/css/style.scss"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/Header.js":"src/components/Header.js","./components/Footer.js":"src/components/Footer.js","./components/Home.js":"src/components/Home.js","./components/Tracking.js":"src/components/Tracking.js","./components/SignUp.js":"src/components/SignUp.js","./components/SignIn.js":"src/components/SignIn.js","./css/style.scss":"src/css/style.scss"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29581,7 +29830,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39261" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44615" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -52,7 +52,6 @@ body #app .app__header--name {
   justify-content: center;
   align-items: center;
   font-size: calc(1vw + 5vh);
-  margin-left: 20px;
   font-family: "Montserrat", sans-serif;
   text-shadow: 0 2px 5px var(--shadow);
   -webkit-touch-callout: none;
@@ -67,12 +66,42 @@ body #app .app__header--name {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
+  width: 30%;
+  height: 100%;
 }
 body #app .app__header--name:hover {
   cursor: pointer;
 }
 body #app .app__header--name:active {
   transform: scale(0.99);
+}
+body #app .app__header--nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 70%;
+  height: 100%;
+}
+body #app .app__header--nav--left {
+  font-size: calc(0.33vw + 1.77vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+body #app .app__header--nav--left:hover {
+  cursor: pointer;
+}
+body #app .app__header--nav--right {
+  font-size: calc(0.33vw + 1.77vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+body #app .app__header--nav--right:hover {
+  cursor: pointer;
 }
 body #app .app__body {
   display: flex;
@@ -101,15 +130,33 @@ body #app .app__body--content--input {
   width: 80%;
   height: 100%;
   font-size: calc(2vw + 1.5vh);
+  font-weight: bold;
+  letter-spacing: 1px;
 }
-body #app .app__body--content--input label {
+body #app .app__body--content--input .top {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  padding-top: calc(1.25vw + 6.25vh);
+}
+body #app .app__body--content--input .bottom {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  padding-bottom: calc(2.5vw + 12.5vh);
+}
+body #app .app__body--content--input .bottom > label, body #app .app__body--content--input .top > label {
   display: flex;
   justify-content: center;
   width: 80%;
-  margin-top: calc(0.33vw + 1.77vh);
 }
-body #app .app__body--content--input input {
-  margin-bottom: calc(0.33vw + 1.77vh);
+body #app .app__body--content--input .bottom > input, body #app .app__body--content--input .top > input {
   font-size: calc(1vw + .77vh);
   width: 80%;
   text-align: center;
@@ -174,7 +221,7 @@ body #app .app__body .package__status--icon .far, body #app .app__body .package_
   height: calc(2vw + 1.5vh);
   width: 100%;
   color: green;
-  margin-top: 20px;
+  margin-top: calc(0.33vw + 1.77vh);
 }
 body #app .app__body .package__container {
   display: flex;
@@ -226,7 +273,7 @@ body #app .app__footer {
 }
 body #app .app__footer a {
   text-align: center;
-  margin: 10px;
+  margin: calc(0.17vw + .8vh);
   font-size: calc(0.33vw + 1.77vh);
   letter-spacing: 1px;
   text-decoration: none;
@@ -268,6 +315,7 @@ body #app .app__footer a:hover {
 .code:hover .code__content a {
   display: inline-block;
   padding: 2px;
+  background-color: var(--tertiary);
 }
 
 .center {

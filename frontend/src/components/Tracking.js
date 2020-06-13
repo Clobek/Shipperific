@@ -9,7 +9,7 @@ export default (props) => {
                 <div className="package__tracking-number">Tracking Number: {props.myPackage.tracking_number}</div>
                 <div className="package__carrier-code">Carrier: {props.myPackage.carrier_code.toUpperCase()}</div>
                 <div className="package__status">Status: {props.myPackage.status}</div>
-                {props.myPackage.status == 'delivered' ? <div className="package__status--icon"><i class="far fa-check-circle"></i></div> : ''}
+                {props.myPackage.status == 'delivered' ? <div className="package__status--icon"><i className="far fa-check-circle"></i></div> : ''}
                 <div className="package__container">
                     {props.myPackage.origin_info.trackinfo.map((item, index)=>{
                         return(
