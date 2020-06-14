@@ -29253,11 +29253,7 @@ var _default = function _default(props) {
     href: "https://www.linkedin.com/in/jonathan-rhymes/",
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Jonathan Rhymes (API+Routes)"), " /", /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://www.linkedin.com/in/taylor-yip/",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "Taylor Yip (Token+Auths)"));
+  }, "Jonathan Rhymes (Back-End+API)"));
 };
 
 exports.default = _default;
@@ -29588,10 +29584,12 @@ var useState = _react.default.useState,
     useEffect = _react.default.useEffect;
 
 var App = function App(props) {
+  //Sets the body in the application\\
   var _useState = useState('Home'),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
       body = _useState2[0],
-      setBody = _useState2[1];
+      setBody = _useState2[1]; //Sets form data for tracking a package\\
+
 
   var _useState3 = useState({
     tracking_number: '',
@@ -29599,7 +29597,8 @@ var App = function App(props) {
   }),
       _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
       formData = _useState4[0],
-      setFormData = _useState4[1];
+      setFormData = _useState4[1]; //Sets user data for both signing up and signing in\\
+
 
   var _useState5 = useState({
     username: '',
@@ -29607,29 +29606,33 @@ var App = function App(props) {
   }),
       _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
       userData = _useState6[0],
-      setUserData = _useState6[1];
+      setUserData = _useState6[1]; //Sets the package we get back from the API\\
+
 
   var _useState7 = useState(null),
       _useState8 = (0, _slicedToArray2.default)(_useState7, 2),
       myPackage = _useState8[0],
-      setMyPackage = _useState8[1];
+      setMyPackage = _useState8[1]; //Sets the theme/color of the page\\
+
 
   var _useState9 = useState('light'),
       _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
       theme = _useState10[0],
-      setTheme = _useState10[1];
+      setTheme = _useState10[1]; //Adds a transition effect to the theme/color change\\
+
 
   var transition = function transition() {
     document.documentElement.classList.add('transition');
     window.setTimeout(function () {
       document.documentElement.classList.remove('transition');
-    }, 500);
-  };
+    }, 1000);
+  }; //Changes the html theme based on whatever the theme state is\\
+
 
   useEffect(function () {
     transition();
     document.documentElement.setAttribute('data-theme', theme);
-  });
+  }); //Resets a few states back to their initial state\\
 
   var resetStates = function resetStates() {
     setFormData({
@@ -29641,15 +29644,18 @@ var App = function App(props) {
       password: ''
     });
     setMyPackage(null);
-  };
+  }; //Changes the form data state based on the input\\
+
 
   var handleChange = function handleChange(event) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value.toLowerCase())));
-  };
+  }; //Changes the user data state based on the input\\
+
 
   var handleUser = function handleUser(event) {
     setUserData(_objectSpread(_objectSpread({}, userData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value)));
-  };
+  }; //Fetches a package from the api and sets the data for it in a state\\
+
 
   var handleTrack = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -29693,9 +29699,10 @@ var App = function App(props) {
     return function handleTrack() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); //Variable for our token\\
 
-  var token;
+
+  var token; //A function to see if the user has a token in local storage\\
 
   var checkForToken = function checkForToken() {
     if (window.localStorage.getItem('token')) {
@@ -29703,16 +29710,18 @@ var App = function App(props) {
     } else {
       return null;
     }
-  };
+  }; //Sets a state for the token\\
+
 
   var _useState11 = useState(null),
       _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
       tokenState = _useState12[0],
-      setTokenState = _useState12[1];
+      setTokenState = _useState12[1]; //Sets the state of token to either the token in local storage or null\\
+
 
   useEffect(function () {
     setTokenState(checkForToken());
-  }, []);
+  }, []); //Takes the user data and sends it to the login route where it's compared and if accurate returns a token to the user & if there is already a token it sets the variable token to the token in local storage\\
 
   var login = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
@@ -29770,7 +29779,8 @@ var App = function App(props) {
     return function login() {
       return _ref2.apply(this, arguments);
     };
-  }();
+  }(); //Takes the user data and sends it to the sign up route to be stored in the database\\
+
 
   var signUp = /*#__PURE__*/function () {
     var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
@@ -29817,13 +29827,15 @@ var App = function App(props) {
     return function signUp() {
       return _ref3.apply(this, arguments);
     };
-  }();
+  }(); //Resets the token variable to essentially nothing, removes the token from the users local storage and then sets the token's state to nothing\\
+
 
   var logout = function logout() {
     token = '';
     window.localStorage.removeItem('token');
     setTokenState(token);
-  };
+  }; //Conditional to change the body of the application based on the state of body\\
+
 
   var content = function content() {
     if (body === 'Home') {
@@ -29901,7 +29913,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39675" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46499" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

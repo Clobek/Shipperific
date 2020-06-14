@@ -36,7 +36,7 @@ const App = (props) => {
         document.documentElement.classList.add('transition');
         window.setTimeout(()=>{
             document.documentElement.classList.remove('transition')
-        }, 500);
+        }, 1000);
     }
 
     //Changes the html theme based on whatever the theme state is\\

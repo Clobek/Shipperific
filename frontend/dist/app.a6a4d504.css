@@ -6,6 +6,7 @@ html {
   --border: #000000;
   --shadow: #000000;
   --font: #000000;
+  --darkfont: #000000;
   --field: ghostwhite;
 }
 
@@ -27,18 +28,9 @@ html[data-theme=dark] {
   margin: 0;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 body {
   height: 100vh;
   width: 100vw;
-  color: var(--font);
 }
 body #app {
   width: 100%;
@@ -81,6 +73,7 @@ body #app .app__header--name {
   width: 25%;
   height: 100%;
   padding-left: 2%;
+  color: var(--font);
 }
 body #app .app__header--name:hover {
   cursor: pointer;
@@ -98,6 +91,18 @@ body #app .app__header--theme {
 body #app .app__header--theme .fa-sun {
   color: yellow;
   font-size: calc(2vw + 5vh);
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 body #app .app__header--theme .fa-sun:hover {
   cursor: pointer;
@@ -106,6 +111,18 @@ body #app .app__header--theme .fa-moon {
   color: ghostwhite;
   font-size: calc(2vw + 5vh);
   transform: rotate(240deg);
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 body #app .app__header--theme .fa-moon:hover {
   cursor: pointer;
@@ -141,6 +158,8 @@ body #app .app__header--nav--left {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
+  color: var(--font);
+  background-color: var(--secondary);
 }
 body #app .app__header--nav--left:hover {
   cursor: pointer;
@@ -170,6 +189,8 @@ body #app .app__header--nav--right {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
+  color: var(--font);
+  background-color: var(--secondary);
 }
 body #app .app__header--nav--right:hover {
   cursor: pointer;
@@ -203,7 +224,7 @@ body #app .app__body--content--input {
   height: 100%;
   font-size: calc(2vw + 1.5vh);
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 body #app .app__body--content--input .top {
   display: flex;
@@ -227,6 +248,7 @@ body #app .app__body--content--input .bottom > label, body #app .app__body--cont
   display: flex;
   justify-content: center;
   width: 80%;
+  color: var(--font);
 }
 body #app .app__body--content--input .bottom > input, body #app .app__body--content--input .top > input {
   font-size: calc(1vw + .77vh);
@@ -290,6 +312,7 @@ body #app .app__body .package__tracking-number, body #app .app__body .package__c
   letter-spacing: 1px;
   text-transform: capitalize;
   margin: 20px auto 0 auto;
+  color: var(--font);
 }
 body #app .app__body .package__status--icon .fa-check-circle {
   display: flex;
@@ -328,6 +351,7 @@ body #app .app__body .package__container--item--checkpoint {
   text-transform: capitalize;
   margin: 10px auto;
   border-bottom: solid var(--border) 1px;
+  color: var(--font);
 }
 body #app .app__body .package__container--item--location, body #app .app__body .package__container--item--status, body #app .app__body .package__container--item--date {
   display: flex;
@@ -336,6 +360,7 @@ body #app .app__body .package__container--item--location, body #app .app__body .
   width: 80%;
   margin: 10px auto;
   border-bottom: solid var(--border) 1px;
+  color: var(--font);
 }
 body #app .app__footer {
   display: flex;
@@ -348,6 +373,7 @@ body #app .app__footer {
   font-size: calc(0.33vw + 1.77vh);
   font-family: "EB Garamond", serif;
   background-color: var(--primary);
+  color: var(--font);
 }
 body #app .app__footer a {
   text-align: center;

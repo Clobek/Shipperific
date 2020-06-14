@@ -6,6 +6,7 @@ html{
     --border: #000000;
     --shadow: #000000;
     --font: #000000;
+    --darkfont: #000000;
     --field: ghostwhite;
 }
 
@@ -27,11 +28,6 @@ html[data-theme='dark']{
     margin: 0;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
 @mixin disable-selection {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none;   /* Safari */
@@ -44,7 +40,6 @@ html[data-theme='dark']{
 body {
     height: 100vh;
     width: 100vw;
-    color: var(--font);
     #app{
         width: 100%;
         height: 100%;
@@ -72,6 +67,7 @@ body {
                     width: 25%;
                     height: 100%;
                     padding-left: 2%;
+                    color: var(--font);
                     &:hover{
                         cursor: pointer;
                     }
@@ -88,6 +84,7 @@ body {
                     .fa-sun{
                         color: yellow;
                         font-size: calc(2vw + 5vh);
+                        @include disable-selection;
                         &:hover{
                             cursor: pointer;
                         }
@@ -96,6 +93,7 @@ body {
                         color: ghostwhite;
                         font-size: calc(2vw + 5vh);
                         transform: rotate(240deg);
+                        @include disable-selection;
                         &:hover{
                             cursor: pointer;
                         }
@@ -120,6 +118,8 @@ body {
                         font-weight: bold;
                         box-shadow: 0 2px 5px var(--shadow);
                         @include disable-selection;
+                        color: var(--font);
+                        background-color: var(--secondary);
                         &:hover{
                             cursor: pointer;
                             transform: translateY(-2px);
@@ -138,6 +138,8 @@ body {
                         font-weight: bold;
                         box-shadow: 0 2px 5px var(--shadow);
                         @include disable-selection;
+                        color: var(--font);
+                        background-color: var(--secondary);
                         &:hover{
                             cursor: pointer;
                             transform: translateY(-2px);
@@ -171,7 +173,7 @@ body {
                         height: 100%;
                         font-size: calc(2vw + 1.5vh);
                         font-weight: bold;
-                        letter-spacing: 1px;
+                        letter-spacing: 2px;
                         .top{
                             display: flex;
                             flex-flow: column;
@@ -194,6 +196,7 @@ body {
                             display: flex;
                             justify-content: center;
                             width: 80%;
+                            color: var(--font);
                         }
                         .bottom > input, .top > input{
                             font-size: calc(1vw + .77vh);
@@ -258,6 +261,7 @@ body {
                         letter-spacing: 1px;
                         text-transform: capitalize;
                         margin: 20px auto 0 auto;
+                        color: var(--font);
                     }
                     &__status{
                         &--icon{
@@ -298,6 +302,7 @@ body {
                                 text-transform: capitalize;
                                 margin: 10px auto;
                                 border-bottom: solid var(--border) 1px;
+                                color: var(--font);
                             }
                             &--location, &--status, &--date{
                                 display: flex;
@@ -306,6 +311,7 @@ body {
                                 width: 80%;
                                 margin: 10px auto;
                                 border-bottom: solid var(--border) 1px;
+                                color: var(--font);
                             }
                         }
                     }
@@ -322,6 +328,7 @@ body {
                 font-size: calc(0.33vw + 1.77vh);
                 font-family: 'EB Garamond', serif;
                 background-color: var(--primary);
+                color: var(--font);
                 a{
                     text-align: center;
                     margin: calc(0.17vw + .8vh);

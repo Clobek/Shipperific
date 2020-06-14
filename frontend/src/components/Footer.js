@@ -13,8 +13,7 @@ export default (props) => {
             </div>
              by Team Codarific:
             <a href="https://www.linkedin.com/in/bryce-belock/" target="_blank" rel="noopener noreferrer">Bryce Belock (Front-End+CSS)</a> /
-            <a href="https://www.linkedin.com/in/jonathan-rhymes/" target="_blank" rel="noopener noreferrer">Jonathan Rhymes (API+Routes)</a> /
-            <a href="https://www.linkedin.com/in/taylor-yip/" target="_blank" rel="noopener noreferrer">Taylor Yip (Token+Auths)</a>
+            <a href="https://www.linkedin.com/in/jonathan-rhymes/" target="_blank" rel="noopener noreferrer">Jonathan Rhymes (Back-End+API)</a>
         </div>
     );
 };
