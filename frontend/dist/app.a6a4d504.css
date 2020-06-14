@@ -2,7 +2,7 @@ html {
   --primary: #AD8762;
   --secondary: #CFAF8F;
   --tertiary: #FAE3CC;
-  --complimentary: #6288ad;
+  --complimentary: #485275;
   --border: #000000;
   --shadow: #000000;
   --font: #000000;
@@ -78,30 +78,43 @@ body #app .app__header--name:active {
 body #app .app__header--nav {
   display: flex;
   justify-content: flex-end;
-  width: 70%;
+  align-items: center;
+  width: 45%;
   height: 100%;
 }
 body #app .app__header--nav--left {
-  font-size: calc(0.33vw + 1.77vh);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: calc(0.66vw + 3vh);
   width: 50%;
-  height: 100%;
+  height: 80%;
+  border: solid var(--border);
+  margin-right: 5%;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px var(--shadow);
 }
 body #app .app__header--nav--left:hover {
   cursor: pointer;
+  transform: translateY(-2px);
 }
 body #app .app__header--nav--right {
-  font-size: calc(0.33vw + 1.77vh);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: calc(0.66vw + 3vh);
   width: 50%;
-  height: 100%;
+  height: 80%;
+  border: solid var(--border);
+  border-radius: 25px;
+  margin-right: 5%;
+  font-weight: bold;
+  box-shadow: 0 2px 5px var(--shadow);
 }
 body #app .app__header--nav--right:hover {
   cursor: pointer;
+  transform: translateY(-2px);
 }
 body #app .app__body {
   display: flex;
@@ -187,8 +200,14 @@ body #app .app__body--content--track button {
   background-color: ghostwhite;
   color: var(--font);
 }
-body #app .app__body--content--track button .fas, body #app .app__body--content--track button .fa-box {
+body #app .app__body--content--track button .fa-box {
   color: #964b00;
+}
+body #app .app__body--content--track button .fa-user-plus {
+  color: green;
+}
+body #app .app__body--content--track button .fa-sign-in-alt {
+  color: blue;
 }
 body #app .app__body--content--track button:hover {
   cursor: pointer;

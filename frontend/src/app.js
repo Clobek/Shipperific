@@ -25,6 +25,18 @@ const App = (props) => {
 
     const [myPackage, setMyPackage] = useState(null)
 
+    const resetStates = ()=>{
+        setFormData({
+            tracking_number: '',
+            carrier: ''
+        });
+        setUserData({
+            username: '',
+            password: ''
+        });
+        setMyPackage(null)
+    }
+
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value.toLowerCase()});
     };
@@ -46,21 +58,34 @@ const App = (props) => {
 
     let token;
 
+    const checkForToken = () =>{
+        if(window.localStorage.getItem('token')){
+            return token = JSON.parse(window.localStorage.getItem('token'));
+        } else{
+            return null;
+        }
+    }
+
+    const [tokenState, setTokenState] = useState(null)
+
+    useEffect(()=>{
+        setTokenState(checkForToken())
+    }, [])
+
     const login = async () => {
         if(window.localStorage.getItem('token')) {
             console.log('token exists')
             token = JSON.parse(window.localStorage.getItem('token'))
         } else {
-            console.log('no token')
-            const response = await fetch('http://localhost:3000/login', {
+            const request = await fetch('http://localhost:3000/login', {
             method: "POST",
             body: JSON.stringify(userData),
             headers: {"Content-Type": "application/json"}
         })
-        const newToken = await response.json()
-        console.log(newToken)
-        token = newToken
+        const newToken = await request.json()
+        token = await newToken
         window.localStorage.setItem('token', JSON.stringify(token))}
+        await setTokenState(token)
     }
 
     const signUp = async ()=>{
@@ -78,20 +103,10 @@ const App = (props) => {
         }
     }
 
-    // const test = async () => {
-    //     const response = await fetch('http://localhost:3000/test', {
-    //         method: "GET",
-    //         headers: {
-    //             "Authorization": `bearer ${token}`
-    //         }
-    //     })
-    //     const result = await response.json()
-    //     console.log(result)
-    // }
-
     const logout = () => {
         token = '';
-        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('token');
+        setTokenState(token)
     }
 
     const content = () =>{
@@ -112,7 +127,7 @@ const App = (props) => {
     }
     return (
         <div className="app">
-            <Header setBody={setBody} login={login} logout={logout} setFormData={setFormData} setMyPackage={setMyPackage}/>
+            <Header tokenState={tokenState} setBody={setBody} login={login} logout={logout} setFormData={setFormData} setMyPackage={setMyPackage} setUserData={setUserData} resetStates={resetStates}/> 
             {content()}
             <Footer />
         </div>

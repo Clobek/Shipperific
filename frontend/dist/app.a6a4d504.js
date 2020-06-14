@@ -29174,25 +29174,28 @@ var _default = function _default(props) {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--name",
     onClick: function onClick() {
-      props.setBody('Home'), props.setFormData(props.initial), props.setMyPackage(props.initial);
+      props.setBody('Home'), props.resetStates();
     }
   }, "Shipperific"), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left"
-  }, props.user ? /*#__PURE__*/_react.default.createElement("div", null, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
-    className: "app__header--nav--left--signUp",
+  }, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--left",
     onClick: function onClick() {
       props.setBody('Sign Up');
     }
-  }, "Sign Up")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "app__header--nav--right"
-  }, props.user ? /*#__PURE__*/_react.default.createElement("div", null, "Sign out") : /*#__PURE__*/_react.default.createElement("div", {
-    className: "app__header--nav--left-signIn",
+  }, "Sign Up"), props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--right",
+    onClick: function onClick() {
+      props.logout();
+    }
+  }, "Sign out") : /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--nav--right",
     onClick: function onClick() {
       props.setBody('Sign In');
     }
-  }, "Sign in"))));
+  }, "Sign in")));
 };
 
 exports.default = _default;
@@ -29375,23 +29378,27 @@ var _default = function _default(props) {
     className: "app__body--content"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--input"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "top"
   }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "username"
-  }, "Username"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "Username:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     id: "username",
     name: "username",
     onChange: props.handleUser,
     required: true
-  }), /*#__PURE__*/_react.default.createElement("label", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "bottom"
+  }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "username"
-  }, "Password"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "password",
     id: "password",
     name: "password",
     onChange: props.handleUser,
     required: true
-  })), /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--track"
   }, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit",
@@ -29399,8 +29406,8 @@ var _default = function _default(props) {
       props.setBody('Home'), props.signUp();
     }
   }, /*#__PURE__*/_react.default.createElement("i", {
-    className: "fas fa-box"
-  }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
+    class: "fas fa-user-plus"
+  }), /*#__PURE__*/_react.default.createElement("br", null), "Sign Up"))));
 };
 
 exports.default = _default;
@@ -29425,32 +29432,36 @@ var _default = function _default(props) {
     className: "app__body--content"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--input"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "top"
   }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "username"
-  }, "Username"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "Username:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     id: "username",
     name: "username",
     onChange: props.handleUser,
     required: true
-  }), /*#__PURE__*/_react.default.createElement("label", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "bottom"
+  }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "username"
-  }, "Password"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "password",
     id: "password",
     name: "password",
     onChange: props.handleUser,
     required: true
-  })), /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--track"
   }, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit",
     onClick: function onClick() {
-      props.setBody('Tracking'), props.signIn();
+      props.setBody('Home'), props.signIn();
     }
   }, /*#__PURE__*/_react.default.createElement("i", {
-    className: "fas fa-box"
-  }), /*#__PURE__*/_react.default.createElement("br", null), "Search"))));
+    class: "fas fa-sign-in-alt"
+  }), /*#__PURE__*/_react.default.createElement("br", null), "Sign In"))));
 };
 
 exports.default = _default;
@@ -29591,6 +29602,18 @@ var App = function App(props) {
       myPackage = _useState8[0],
       setMyPackage = _useState8[1];
 
+  var resetStates = function resetStates() {
+    setFormData({
+      tracking_number: '',
+      carrier: ''
+    });
+    setUserData({
+      username: '',
+      password: ''
+    });
+    setMyPackage(null);
+  };
+
   var handleChange = function handleChange(event) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value.toLowerCase())));
   };
@@ -29645,9 +29668,26 @@ var App = function App(props) {
 
   var token;
 
+  var checkForToken = function checkForToken() {
+    if (window.localStorage.getItem('token')) {
+      return token = JSON.parse(window.localStorage.getItem('token'));
+    } else {
+      return null;
+    }
+  };
+
+  var _useState9 = useState(null),
+      _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
+      tokenState = _useState10[0],
+      setTokenState = _useState10[1];
+
+  useEffect(function () {
+    setTokenState(checkForToken());
+  }, []);
+
   var login = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-      var response, newToken;
+      var request, newToken;
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -29663,8 +29703,7 @@ var App = function App(props) {
               break;
 
             case 5:
-              console.log('no token');
-              _context2.next = 8;
+              _context2.next = 7;
               return fetch('http://localhost:3000/login', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29673,18 +29712,25 @@ var App = function App(props) {
                 }
               });
 
-            case 8:
-              response = _context2.sent;
-              _context2.next = 11;
-              return response.json();
+            case 7:
+              request = _context2.sent;
+              _context2.next = 10;
+              return request.json();
 
-            case 11:
+            case 10:
               newToken = _context2.sent;
-              console.log(newToken);
-              token = newToken;
+              _context2.next = 13;
+              return newToken;
+
+            case 13:
+              token = _context2.sent;
               window.localStorage.setItem('token', JSON.stringify(token));
 
             case 15:
+              _context2.next = 17;
+              return setTokenState(token);
+
+            case 17:
             case "end":
               return _context2.stop();
           }
@@ -29742,21 +29788,12 @@ var App = function App(props) {
     return function signUp() {
       return _ref3.apply(this, arguments);
     };
-  }(); // const test = async () => {
-  //     const response = await fetch('http://localhost:3000/test', {
-  //         method: "GET",
-  //         headers: {
-  //             "Authorization": `bearer ${token}`
-  //         }
-  //     })
-  //     const result = await response.json()
-  //     console.log(result)
-  // }
-
+  }();
 
   var logout = function logout() {
     token = '';
     window.localStorage.removeItem('token');
+    setTokenState(token);
   };
 
   var content = function content() {
@@ -29791,11 +29828,14 @@ var App = function App(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
   }, /*#__PURE__*/_react.default.createElement(_Header.default, {
+    tokenState: tokenState,
     setBody: setBody,
     login: login,
     logout: logout,
     setFormData: setFormData,
-    setMyPackage: setMyPackage
+    setMyPackage: setMyPackage,
+    setUserData: setUserData,
+    resetStates: resetStates
   }), content(), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
 };
 
@@ -29830,7 +29870,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44615" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33811" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
