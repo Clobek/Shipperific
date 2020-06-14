@@ -29177,6 +29177,18 @@ var _default = function _default(props) {
       props.setBody('Home'), props.resetStates();
     }
   }, "Shipperific"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__header--theme"
+  }, props.theme === 'light' ? /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-sun",
+    onClick: function onClick() {
+      props.setTheme('dark');
+    }
+  }) : /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-moon",
+    onClick: function onClick() {
+      props.setTheme('light');
+    }
+  })), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav"
   }, props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left"
@@ -29406,7 +29418,7 @@ var _default = function _default(props) {
       props.setBody('Home'), props.signUp();
     }
   }, /*#__PURE__*/_react.default.createElement("i", {
-    class: "fas fa-user-plus"
+    className: "fas fa-user-plus"
   }), /*#__PURE__*/_react.default.createElement("br", null), "Sign Up"))));
 };
 
@@ -29460,7 +29472,7 @@ var _default = function _default(props) {
       props.setBody('Home'), props.signIn();
     }
   }, /*#__PURE__*/_react.default.createElement("i", {
-    class: "fas fa-sign-in-alt"
+    className: "fas fa-sign-in-alt"
   }), /*#__PURE__*/_react.default.createElement("br", null), "Sign In"))));
 };
 
@@ -29602,6 +29614,23 @@ var App = function App(props) {
       myPackage = _useState8[0],
       setMyPackage = _useState8[1];
 
+  var _useState9 = useState('light'),
+      _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
+      theme = _useState10[0],
+      setTheme = _useState10[1];
+
+  var transition = function transition() {
+    document.documentElement.classList.add('transition');
+    window.setTimeout(function () {
+      document.documentElement.classList.remove('transition');
+    }, 500);
+  };
+
+  useEffect(function () {
+    transition();
+    document.documentElement.setAttribute('data-theme', theme);
+  });
+
   var resetStates = function resetStates() {
     setFormData({
       tracking_number: '',
@@ -29676,10 +29705,10 @@ var App = function App(props) {
     }
   };
 
-  var _useState9 = useState(null),
-      _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
-      tokenState = _useState10[0],
-      setTokenState = _useState10[1];
+  var _useState11 = useState(null),
+      _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
+      tokenState = _useState12[0],
+      setTokenState = _useState12[1];
 
   useEffect(function () {
     setTokenState(checkForToken());
@@ -29828,6 +29857,8 @@ var App = function App(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
   }, /*#__PURE__*/_react.default.createElement(_Header.default, {
+    theme: theme,
+    setTheme: setTheme,
     tokenState: tokenState,
     setBody: setBody,
     login: login,
@@ -29870,7 +29901,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33811" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39675" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -28,7 +28,7 @@ export default (props) => {
                     </div>
                 </div>
                 <div className="app__body--content--track">
-                    <button type="submit" onClick={()=>{props.setBody('Home'), props.signIn()}}><i class="fas fa-sign-in-alt"></i><br/>Sign In</button>
+                    <button type="submit" onClick={()=>{props.setBody('Home'), props.signIn()}}><i className="fas fa-sign-in-alt"></i><br/>Sign In</button>
                 </div>        
             </div>
         </div>

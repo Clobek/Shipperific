@@ -9,6 +9,18 @@ html{
     --field: ghostwhite;
 }
 
+html[data-theme='dark']{
+    --primary: #080808;
+    --secondary: #101010;
+    --tertiary: #181818;
+    --complimentary: rgb(116, 0, 0);
+    --border: #D8D8D8;
+    --shadow: #D8D8D8;
+    --font: #D8D8D8;
+    --darkfont: #000000;
+    --field: #D8D8D8;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -51,19 +63,42 @@ body {
                 background-color: var(--primary);
                 &--name{
                     display: flex;
-                    justify-content: center;
+                    justify-content: flex-start;
                     align-items: center;
                     font-size: calc(1vw + 5vh);
                     font-family: 'Montserrat', sans-serif;
                     text-shadow: 0 2px 5px var(--shadow);
                     @include disable-selection;
-                    width: 30%;
+                    width: 25%;
                     height: 100%;
+                    padding-left: 2%;
                     &:hover{
                         cursor: pointer;
                     }
                     &:active{
                         transform: scale(0.99);
+                    }
+                }
+                &--theme{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 100%;
+                    .fa-sun{
+                        color: yellow;
+                        font-size: calc(2vw + 5vh);
+                        &:hover{
+                            cursor: pointer;
+                        }
+                    }
+                    .fa-moon{
+                        color: ghostwhite;
+                        font-size: calc(2vw + 5vh);
+                        transform: rotate(240deg);
+                        &:hover{
+                            cursor: pointer;
+                        }
                     }
                 }
                 &--nav{
@@ -84,6 +119,7 @@ body {
                         border-radius: 25px;
                         font-weight: bold;
                         box-shadow: 0 2px 5px var(--shadow);
+                        @include disable-selection;
                         &:hover{
                             cursor: pointer;
                             transform: translateY(-2px);
@@ -101,6 +137,7 @@ body {
                         margin-right: 5%;
                         font-weight: bold;
                         box-shadow: 0 2px 5px var(--shadow);
+                        @include disable-selection;
                         &:hover{
                             cursor: pointer;
                             transform: translateY(-2px);
@@ -164,10 +201,10 @@ body {
                             text-align: center;
                             padding: 2px;
                             letter-spacing: 1px;
-                            border: solid var(--border);
+                            border: solid black;
                             box-shadow: 0 3px 5px var(--shadow);
                             outline: none;
-                            color: var(--font);
+                            color: var(--darkfont);
                         }
                     }
                     &--track{
@@ -187,7 +224,7 @@ body {
                             box-shadow: 0 3px 5px var(--shadow);
                             outline: none;
                             background-color: ghostwhite;
-                            color: var(--font);
+                            color: var(--darkfont);
                             .fa-box{
                                 color: #964b00;
                             }
@@ -224,7 +261,7 @@ body {
                     }
                     &__status{
                         &--icon{
-                            .far, .fa-check-circle{
+                            .fa-check-circle{
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -356,3 +393,9 @@ body {
     }    
 }
 
+html.transition, html.transition *, html.transition *:before, html.transition *:after{
+    transition: all 1000ms !important;
+    transition-delay: 0 !important;
+}
+
+// Used https://www.youtube.com/watch?v=ZKXv_ZHQ654 to help with light to dark, he did his transitions with a checkbox/toggle and a script in html. I used a useState and useEffect on an icon that switches based on a conditional to achieve the same thing.

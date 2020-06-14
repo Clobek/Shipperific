@@ -9,6 +9,18 @@ html {
   --field: ghostwhite;
 }
 
+html[data-theme=dark] {
+  --primary: #080808;
+  --secondary: #101010;
+  --tertiary: #181818;
+  --complimentary: rgb(116, 0, 0);
+  --border: #D8D8D8;
+  --shadow: #D8D8D8;
+  --font: #D8D8D8;
+  --darkfont: #000000;
+  --field: #D8D8D8;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -49,7 +61,7 @@ body #app .app__header {
 }
 body #app .app__header--name {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: calc(1vw + 5vh);
   font-family: "Montserrat", sans-serif;
@@ -66,14 +78,37 @@ body #app .app__header--name {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
-  width: 30%;
+  width: 25%;
   height: 100%;
+  padding-left: 2%;
 }
 body #app .app__header--name:hover {
   cursor: pointer;
 }
 body #app .app__header--name:active {
   transform: scale(0.99);
+}
+body #app .app__header--theme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 100%;
+}
+body #app .app__header--theme .fa-sun {
+  color: yellow;
+  font-size: calc(2vw + 5vh);
+}
+body #app .app__header--theme .fa-sun:hover {
+  cursor: pointer;
+}
+body #app .app__header--theme .fa-moon {
+  color: ghostwhite;
+  font-size: calc(2vw + 5vh);
+  transform: rotate(240deg);
+}
+body #app .app__header--theme .fa-moon:hover {
+  cursor: pointer;
 }
 body #app .app__header--nav {
   display: flex;
@@ -94,6 +129,18 @@ body #app .app__header--nav--left {
   border-radius: 25px;
   font-weight: bold;
   box-shadow: 0 2px 5px var(--shadow);
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 body #app .app__header--nav--left:hover {
   cursor: pointer;
@@ -111,6 +158,18 @@ body #app .app__header--nav--right {
   margin-right: 5%;
   font-weight: bold;
   box-shadow: 0 2px 5px var(--shadow);
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 body #app .app__header--nav--right:hover {
   cursor: pointer;
@@ -175,10 +234,10 @@ body #app .app__body--content--input .bottom > input, body #app .app__body--cont
   text-align: center;
   padding: 2px;
   letter-spacing: 1px;
-  border: solid var(--border);
+  border: solid black;
   box-shadow: 0 3px 5px var(--shadow);
   outline: none;
-  color: var(--font);
+  color: var(--darkfont);
 }
 body #app .app__body--content--track {
   display: flex;
@@ -198,7 +257,7 @@ body #app .app__body--content--track button {
   box-shadow: 0 3px 5px var(--shadow);
   outline: none;
   background-color: ghostwhite;
-  color: var(--font);
+  color: var(--darkfont);
 }
 body #app .app__body--content--track button .fa-box {
   color: #964b00;
@@ -232,7 +291,7 @@ body #app .app__body .package__tracking-number, body #app .app__body .package__c
   text-transform: capitalize;
   margin: 20px auto 0 auto;
 }
-body #app .app__body .package__status--icon .far, body #app .app__body .package__status--icon .fa-check-circle {
+body #app .app__body .package__status--icon .fa-check-circle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -354,6 +413,11 @@ body #app .app__footer a:hover {
   width: calc(10vw + 10vh);
   height: calc(10vw + 10vh);
   animation: spin 2s linear infinite;
+}
+
+html.transition, html.transition *, html.transition *:before, html.transition *:after {
+  transition: all 1000ms !important;
+  transition-delay: 0 !important;
 }
 
 /*# sourceMappingURL=/app.a6a4d504.css.map */

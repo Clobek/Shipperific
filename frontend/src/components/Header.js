@@ -9,6 +9,9 @@ export default (props) => {
             }}>
             Shipperific
             </div>
+            <div className="app__header--theme">
+                {props.theme === 'light' ? <i className="fas fa-sun" onClick={()=>{props.setTheme('dark')}}></i> : <i className="fas fa-moon" onClick={()=>{props.setTheme('light')}}></i>}
+            </div>
             <div className="app__header--nav">
                     {props.tokenState ? 
                     <div className="app__header--nav--left">Saved</div> 
