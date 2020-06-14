@@ -29191,7 +29191,10 @@ var _default = function _default(props) {
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav"
   }, props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "app__header--nav--left"
+    className: "app__header--nav--left",
+    onClick: function onClick() {
+      props.setBody('Saved');
+    }
   }, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left",
     onClick: function onClick() {
@@ -29288,6 +29291,7 @@ var _default = function _default(props) {
     name: "tracking_number",
     value: props.setFormData.tracking_number,
     onChange: props.handleChange,
+    maxLength: "30",
     required: true
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "bottom"
@@ -29299,6 +29303,7 @@ var _default = function _default(props) {
     name: "carrier",
     value: props.setFormData.carrier,
     onChange: props.handleChange,
+    maxLength: "15",
     required: true
   }))), /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--content--track"
@@ -29473,6 +29478,84 @@ var _default = function _default(props) {
 };
 
 exports.default = _default;
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"src/components/Saved.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(props) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--saved",
+    onClick: function onClick() {
+      document.getElementById('modal').style.display = 'block';
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-save"
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    id: "modal"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__exit"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "far fa-times-circle",
+    onClick: function onClick() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__form"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__form--item"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "item"
+  }, "Item Name:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    maxLength: "30",
+    name: "item",
+    id: "item",
+    onChange: props.handleChange
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__form--tracking"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "trackingNumber"
+  }, "Tracking Number:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    maxLength: "30",
+    name: "tracking_number",
+    id: "trackingNumber",
+    onChange: props.handleChange
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__form--carrier"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "carrier"
+  }, "Carrier:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    maxLength: "15",
+    name: "carrier",
+    id: "carrier",
+    onChange: props.handleChange
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "modal__form--submit"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit",
+    onClick: function onClick() {
+      props.setBody('Saved'), props.handleSave();
+    }
+  }, "Save"))))));
+};
+
+exports.default = _default;
 },{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -29572,6 +29655,8 @@ var _SignUp = _interopRequireDefault(require("./components/SignUp.js"));
 
 var _SignIn = _interopRequireDefault(require("./components/SignIn.js"));
 
+var _Saved = _interopRequireDefault(require("./components/Saved.js"));
+
 require("./css/style.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29592,6 +29677,7 @@ var App = function App(props) {
 
 
   var _useState3 = useState({
+    item: '',
     tracking_number: '',
     carrier: ''
   }),
@@ -29636,6 +29722,7 @@ var App = function App(props) {
 
   var resetStates = function resetStates() {
     setFormData({
+      item: '',
       tracking_number: '',
       carrier: ''
     });
@@ -29699,6 +29786,53 @@ var App = function App(props) {
     return function handleTrack() {
       return _ref.apply(this, arguments);
     };
+  }();
+
+  var handleSave = /*#__PURE__*/function () {
+    var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var request, response;
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              event.preventDefault();
+              _context2.prev = 1;
+              _context2.next = 4;
+              return fetch('http://localhost:3000/packages', {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                  'Authorization': "bearer ".concat(tokenState),
+                  "Content-Type": "application/json"
+                }
+              });
+
+            case 4:
+              request = _context2.sent;
+              _context2.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context2.sent;
+              _context2.next = 13;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](1);
+              console.error(_context2.t0);
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 10]]);
+    }));
+
+    return function handleSave() {
+      return _ref2.apply(this, arguments);
+    };
   }(); //Variable for our token\\
 
 
@@ -29724,24 +29858,24 @@ var App = function App(props) {
   }, []); //Takes the user data and sends it to the login route where it's compared and if accurate returns a token to the user & if there is already a token it sets the variable token to the token in local storage\\
 
   var login = /*#__PURE__*/function () {
-    var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
       var request, newToken;
-      return _regenerator.default.wrap(function _callee2$(_context2) {
+      return _regenerator.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               if (!window.localStorage.getItem('token')) {
-                _context2.next = 5;
+                _context3.next = 5;
                 break;
               }
 
               console.log('token exists');
               token = JSON.parse(window.localStorage.getItem('token'));
-              _context2.next = 15;
+              _context3.next = 15;
               break;
 
             case 5:
-              _context2.next = 7;
+              _context3.next = 7;
               return fetch('http://localhost:3000/login', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29751,47 +29885,47 @@ var App = function App(props) {
               });
 
             case 7:
-              request = _context2.sent;
-              _context2.next = 10;
+              request = _context3.sent;
+              _context3.next = 10;
               return request.json();
 
             case 10:
-              newToken = _context2.sent;
-              _context2.next = 13;
+              newToken = _context3.sent;
+              _context3.next = 13;
               return newToken;
 
             case 13:
-              token = _context2.sent;
+              token = _context3.sent;
               window.localStorage.setItem('token', JSON.stringify(token));
 
             case 15:
-              _context2.next = 17;
+              _context3.next = 17;
               return setTokenState(token);
 
             case 17:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
     return function login() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }(); //Takes the user data and sends it to the sign up route to be stored in the database\\
 
 
   var signUp = /*#__PURE__*/function () {
-    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+    var _ref4 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
       var request, response;
-      return _regenerator.default.wrap(function _callee3$(_context3) {
+      return _regenerator.default.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               console.log('running function');
-              _context3.prev = 1;
-              _context3.next = 4;
+              _context4.prev = 1;
+              _context4.next = 4;
               return fetch('http://localhost:3000/signup', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29801,31 +29935,31 @@ var App = function App(props) {
               });
 
             case 4:
-              request = _context3.sent;
-              _context3.next = 7;
+              request = _context4.sent;
+              _context4.next = 7;
               return request.json();
 
             case 7:
-              response = _context3.sent;
+              response = _context4.sent;
               console.log(response);
-              _context3.next = 14;
+              _context4.next = 14;
               break;
 
             case 11:
-              _context3.prev = 11;
-              _context3.t0 = _context3["catch"](1);
-              console.error(_context3.t0);
+              _context4.prev = 11;
+              _context4.t0 = _context4["catch"](1);
+              console.error(_context4.t0);
 
             case 14:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3, null, [[1, 11]]);
+      }, _callee4, null, [[1, 11]]);
     }));
 
     return function signUp() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }(); //Resets the token variable to essentially nothing, removes the token from the users local storage and then sets the token's state to nothing\\
 
@@ -29863,6 +29997,12 @@ var App = function App(props) {
         handleUser: handleUser,
         signIn: login
       });
+    } else if (body === 'Saved') {
+      return /*#__PURE__*/_react.default.createElement(_Saved.default, {
+        setBody: setBody,
+        handleChange: handleChange,
+        handleSave: handleSave
+      });
     }
   };
 
@@ -29885,7 +30025,7 @@ var App = function App(props) {
 var target = document.getElementById('app');
 
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(App, null), target);
-},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/Header.js":"src/components/Header.js","./components/Footer.js":"src/components/Footer.js","./components/Home.js":"src/components/Home.js","./components/Tracking.js":"src/components/Tracking.js","./components/SignUp.js":"src/components/SignUp.js","./components/SignIn.js":"src/components/SignIn.js","./css/style.scss":"src/css/style.scss"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/Header.js":"src/components/Header.js","./components/Footer.js":"src/components/Footer.js","./components/Home.js":"src/components/Home.js","./components/Tracking.js":"src/components/Tracking.js","./components/SignUp.js":"src/components/SignUp.js","./components/SignIn.js":"src/components/SignIn.js","./components/Saved.js":"src/components/Saved.js","./css/style.scss":"src/css/style.scss"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29913,7 +30053,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46499" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41519" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

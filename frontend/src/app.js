@@ -6,6 +6,7 @@ import Home from './components/Home.js';
 import Tracking from './components/Tracking.js'
 import SignUp from './components/SignUp.js'
 import SignIn from './components/SignIn.js'
+import Saved from './components/Saved.js'
 import './css/style.scss';
 const {useState, useEffect} = React
 
@@ -15,6 +16,7 @@ const App = (props) => {
 
     //Sets form data for tracking a package\\
     const [formData, setFormData] = useState({
+        item: '',
         tracking_number: '',
         carrier: ''
     });
@@ -48,6 +50,7 @@ const App = (props) => {
     //Resets a few states back to their initial state\\
     const resetStates = ()=>{
         setFormData({
+            item: '',
             tracking_number: '',
             carrier: ''
         });
@@ -75,6 +78,24 @@ const App = (props) => {
             const request = await fetch(`http://localhost:3000/api/${formData.tracking_number}/${formData.carrier}`)
             const response = await request.json()
             await setMyPackage(response.items[0])
+        } catch(error){
+            console.error(error)
+        }
+    }
+
+    const handleSave = async () =>{
+        event.preventDefault();
+        try{
+            const request = await fetch('http://localhost:3000/packages', {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Authorization': `bearer ${tokenState}`,
+                    "Content-Type": "application/json"
+
+                }
+            })
+            const response = await request.json()
         } catch(error){
             console.error(error)
         }
@@ -155,6 +176,8 @@ const App = (props) => {
             return <SignUp setBody={setBody} handleUser={handleUser} signUp={signUp}/>
         } else if(body === 'Sign In'){
             return <SignIn setBody={setBody} handleUser={handleUser} signIn={login}/>
+        } else if(body === 'Saved'){
+            return <Saved setBody={setBody} handleChange={handleChange} handleSave={handleSave}/>
         }
     }
     return (

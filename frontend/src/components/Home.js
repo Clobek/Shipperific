@@ -14,6 +14,7 @@ export default (props) => {
                         name="tracking_number"
                         value={props.setFormData.tracking_number}
                         onChange={props.handleChange}
+                        maxLength="30"
                         required
                         />
                     </div>
@@ -25,6 +26,7 @@ export default (props) => {
                         name="carrier"
                         value={props.setFormData.carrier}
                         onChange={props.handleChange}
+                        maxLength="15"
                         required
                         />   
                     </div>
