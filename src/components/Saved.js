@@ -28,7 +28,8 @@ export default (props) => {
                 </div>      
             </div>
             <div className="app__body--documents">
-                {props.saved.map((item, index)=>{
+                {props.saved ? 
+                props.saved.map((item, index)=>{
                     return(
                         <div className="app__body--documents--item" key={index}>
                             <div className="app__body--documents--item--name">Item Name: {item.item}</div>
@@ -60,7 +61,9 @@ export default (props) => {
                             </div>
                         </div>
                     )
-                })}
+                })
+                : 
+                <div className="app__body--documents--none">You do not have any packages saved.</div>}
             </div>
         </div>
     );
