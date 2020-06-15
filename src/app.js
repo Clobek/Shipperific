@@ -102,7 +102,7 @@ const App = (props) => {
     const handleUpdate = async (id) =>{
         event.preventDefault();
         try{
-            const request = await fetch(`http://localhost:3000/packages/${id}`, {
+            const request = await fetch(`https://shipperific.herokuapp.com/packages/${id}`, {
                 method: "PUT",
                 body: JSON.stringify(formData),
                 headers: {
@@ -118,7 +118,7 @@ const App = (props) => {
     const handleSearch = async (tracking, carrier)=>{
         event.preventDefault();
         try{
-            const request = await fetch(`http://localhost:3000/api/${tracking}/${carrier}`)
+            const request = await fetch(`https://shipperific.herokuapp.com/api/${tracking}/${carrier}`)
             const response = await request.json()
             await setMyPackage(response.items[0])
         } catch(error){
