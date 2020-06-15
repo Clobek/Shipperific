@@ -133,7 +133,8 @@ const App = (props) => {
     const handlePackage = async ()=>{
         event.preventDefault();
         try{
-            const request = await fetch('https://shipperific.herokuapp.com.com/packages', {
+            console.log(tokenState)
+            const request = await fetch('https://shipperific.herokuapp.com/packages', {
                 method: 'GET',
                 headers: {
                     'Authorization': `bearer ${tokenState}`

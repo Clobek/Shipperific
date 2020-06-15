@@ -3073,9 +3073,9 @@ if ("development" !== "production") {
 'use strict';
 
 if ("development" === 'production') {
-  module.exports = require('./cjs/react.production.min.js.js');
+  module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = require('./cjs/react.development.js.js');
+  module.exports = require('./cjs/react.development.js');
 }
 },{"./cjs/react.development.js":"node_modules/react/cjs/react.development.js"}],"node_modules/scheduler/cjs/scheduler.development.js":[function(require,module,exports) {
 /** @license React v0.19.1
@@ -3936,9 +3936,9 @@ if ("development" !== "production") {
 'use strict';
 
 if ("development" === 'production') {
-  module.exports = require('./cjs/scheduler.production.min.js.js');
+  module.exports = require('./cjs/scheduler.production.min.js');
 } else {
-  module.exports = require('./cjs/scheduler.development.js.js');
+  module.exports = require('./cjs/scheduler.development.js');
 }
 },{"./cjs/scheduler.development.js":"node_modules/scheduler/cjs/scheduler.development.js"}],"node_modules/scheduler/cjs/scheduler-tracing.development.js":[function(require,module,exports) {
 /** @license React v0.19.1
@@ -4292,9 +4292,9 @@ if ("development" !== "production") {
 'use strict';
 
 if ("development" === 'production') {
-  module.exports = require('./cjs/scheduler-tracing.production.min.js.js');
+  module.exports = require('./cjs/scheduler-tracing.production.min.js');
 } else {
-  module.exports = require('./cjs/scheduler-tracing.development.js.js');
+  module.exports = require('./cjs/scheduler-tracing.development.js');
 }
 },{"./cjs/scheduler-tracing.development.js":"node_modules/scheduler/cjs/scheduler-tracing.development.js"}],"node_modules/react-dom/cjs/react-dom.development.js":[function(require,module,exports) {
 /** @license React v16.13.1
@@ -29150,9 +29150,9 @@ if ("development" === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = require('./cjs/react-dom.production.min.js.js');
+  module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = require('./cjs/react-dom.development.js.js');
+  module.exports = require('./cjs/react-dom.development.js');
 }
 },{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"src/components/Header.js":[function(require,module,exports) {
 "use strict";
@@ -29715,19 +29715,19 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
-var _Header = _interopRequireDefault(require("./components/Header.js.js"));
+var _Header = _interopRequireDefault(require("./components/Header.js"));
 
-var _Footer = _interopRequireDefault(require("./components/Footer.js.js"));
+var _Footer = _interopRequireDefault(require("./components/Footer.js"));
 
-var _Home = _interopRequireDefault(require("./components/Home.js.js"));
+var _Home = _interopRequireDefault(require("./components/Home.js"));
 
-var _Tracking = _interopRequireDefault(require("./components/Tracking.js.js"));
+var _Tracking = _interopRequireDefault(require("./components/Tracking.js"));
 
-var _SignUp = _interopRequireDefault(require("./components/SignUp.js.js"));
+var _SignUp = _interopRequireDefault(require("./components/SignUp.js"));
 
-var _SignIn = _interopRequireDefault(require("./components/SignIn.js.js"));
+var _SignIn = _interopRequireDefault(require("./components/SignIn.js"));
 
-var _Saved = _interopRequireDefault(require("./components/Saved.js.js"));
+var _Saved = _interopRequireDefault(require("./components/Saved.js"));
 
 require("./css/style.scss");
 
@@ -29826,7 +29826,7 @@ var App = function App(props) {
               event.preventDefault();
               _context.prev = 1;
               _context.next = 4;
-              return fetch("http://localhost:3000/api/".concat(formData.tracking_number, "/").concat(formData.carrier));
+              return fetch("https://shipperific.herokuapp.com/api/".concat(formData.tracking_number, "/").concat(formData.carrier));
 
             case 4:
               request = _context.sent;
@@ -29870,7 +29870,7 @@ var App = function App(props) {
               event.preventDefault();
               _context2.prev = 1;
               _context2.next = 4;
-              return fetch('http://localhost:3000/packages', {
+              return fetch('https://shipperific.herokuapp.com/packages', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
@@ -29912,7 +29912,7 @@ var App = function App(props) {
               event.preventDefault();
               _context3.prev = 1;
               _context3.next = 4;
-              return fetch("http://localhost:3000/packages/".concat(id), {
+              return fetch("https://shipperific.herokuapp.com/packages/".concat(id), {
                 method: "PUT",
                 body: JSON.stringify(formData),
                 headers: {
@@ -29954,7 +29954,7 @@ var App = function App(props) {
               event.preventDefault();
               _context4.prev = 1;
               _context4.next = 4;
-              return fetch("http://localhost:3000/api/".concat(tracking, "/").concat(carrier));
+              return fetch("https://shipperific.herokuapp.com/api/".concat(tracking, "/").concat(carrier));
 
             case 4:
               request = _context4.sent;
@@ -30004,39 +30004,40 @@ var App = function App(props) {
             case 0:
               event.preventDefault();
               _context5.prev = 1;
-              _context5.next = 4;
-              return fetch('http://localhost:3000/packages', {
+              console.log(tokenState);
+              _context5.next = 5;
+              return fetch('https://shipperific.herokuapp.com/packages', {
                 method: 'GET',
                 headers: {
                   'Authorization': "bearer ".concat(tokenState)
                 }
               });
 
-            case 4:
+            case 5:
               request = _context5.sent;
-              _context5.next = 7;
+              _context5.next = 8;
               return request.json();
 
-            case 7:
+            case 8:
               response = _context5.sent;
-              _context5.next = 10;
+              _context5.next = 11;
               return setSaved(response);
 
-            case 10:
-              _context5.next = 15;
+            case 11:
+              _context5.next = 16;
               break;
 
-            case 12:
-              _context5.prev = 12;
+            case 13:
+              _context5.prev = 13;
               _context5.t0 = _context5["catch"](1);
               console.error(_context5.t0);
 
-            case 15:
+            case 16:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[1, 12]]);
+      }, _callee5, null, [[1, 13]]);
     }));
 
     return function handlePackage() {
@@ -30053,7 +30054,7 @@ var App = function App(props) {
               event.preventDefault();
               _context6.prev = 1;
               _context6.next = 4;
-              return fetch("http://localhost:3000/packages/".concat(id), {
+              return fetch("https://shipperific.herokuapp.com/packages/".concat(id), {
                 method: 'DELETE',
                 headers: {
                   'Authorization': "bearer ".concat(tokenState)
@@ -30122,7 +30123,7 @@ var App = function App(props) {
 
             case 4:
               _context7.next = 6;
-              return fetch('http://localhost:3000/login', {
+              return fetch('https://shipperific.herokuapp.com/login', {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {
@@ -30172,7 +30173,7 @@ var App = function App(props) {
               console.log('running function');
               _context8.prev = 1;
               _context8.next = 4;
-              return fetch('http://localhost:3000/signup', {
+              return fetch('https://shipperific.herokuapp.com/signup', {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {
@@ -30305,7 +30306,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37035" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36051" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
