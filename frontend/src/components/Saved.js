@@ -22,12 +22,32 @@ export default (props) => {
                             <input type="text" maxLength="15" name="carrier" id="carrier" onChange={props.handleChange}/>
                         </div>
                         <div className="modal__form--submit">
-                            <button type="submit" onClick={()=>{props.setBody('Saved'), props.handleSave()}}>Save</button>
+                            <button type="submit" onClick={()=>{props.handleSave(), props.handlePackage(), document.getElementById('modal').style.display='none'}}>Save</button>
                         </div>
                     </div>
                 </div>      
             </div>
-            
+            <div className="app__body--documents">
+                {props.saved ? 
+                props.saved.map((item, index)=>{
+                    return(
+                        <div className="app__body--documents--item" key={index}>
+                            <div className="app__body--documents--item--name">Item Name: {item.item}</div>
+                            <div className="app__body--documents--item--tracking">Tracking Number: {item.tracking_number}</div>
+                            <div className="app__body--documents--item--carrier">Carrier: {item.carrier_code}</div>
+                            <div className="app__body--documents--item--buttons">
+                                <button>Update</button>
+                                <button onClick={()=>{
+                                    props.handleDelete(item._id), props.handlePackage()
+                                }}>Delete</button>
+                                <button>Search</button>
+                            </div>
+                        </div>
+                    )
+                })
+                : 
+                <div className="app__body--documents--none">You do not have any packages saved.</div>}
+            </div>
         </div>
     );
 };

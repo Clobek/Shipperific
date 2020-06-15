@@ -45,7 +45,7 @@ const App = (props) => {
     useEffect(()=>{
         transition()
         document.documentElement.setAttribute('data-theme', theme);
-    })
+    }, [transition])
 
     //Resets a few states back to their initial state\\
     const resetStates = ()=>{
@@ -63,7 +63,7 @@ const App = (props) => {
 
     //Changes the form data state based on the input\\
     const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value.toLowerCase()});
+        setFormData({...formData, [event.target.name]: event.target.value.toLowerCase()});
     };
 
     //Changes the user data state based on the input\\
@@ -92,11 +92,43 @@ const App = (props) => {
                 headers: {
                     'Authorization': `bearer ${tokenState}`,
                     "Content-Type": "application/json"
+                }
+            })
+        } catch(error){
+            console.error(error)
+        }
+    }
 
+    //Creates a state for saved packages from database\\
+    const [saved, setSaved] = useState(null)
+
+    //Requests saved packages from database that match the userID and puts the response in the state\\
+    const handlePackage = async ()=>{
+        event.preventDefault();
+        try{
+            const request = await fetch('http://localhost:3000/packages', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `bearer ${tokenState}`
                 }
             })
             const response = await request.json()
-        } catch(error){
+            await setSaved(response)
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+    const handleDelete = async (id)=>{
+        event.preventDefault();
+        try{
+            await fetch(`http://localhost:3000/packages/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `bearer ${tokenState}`
+                }
+            })
+        }catch(error){
             console.error(error)
         }
     }
@@ -124,7 +156,6 @@ const App = (props) => {
     //Takes the user data and sends it to the login route where it's compared and if accurate returns a token to the user & if there is already a token it sets the variable token to the token in local storage\\
     const login = async () => {
         if(window.localStorage.getItem('token')) {
-            console.log('token exists')
             token = JSON.parse(window.localStorage.getItem('token'))
         } else {
             const request = await fetch('http://localhost:3000/login', {
@@ -148,7 +179,6 @@ const App = (props) => {
                 headers: {"Content-Type": "application/json"}
             })
             const response = await request.json()
-            console.log(response)
         } catch(error){
             console.error(error)
         }
@@ -177,12 +207,12 @@ const App = (props) => {
         } else if(body === 'Sign In'){
             return <SignIn setBody={setBody} handleUser={handleUser} signIn={login}/>
         } else if(body === 'Saved'){
-            return <Saved setBody={setBody} handleChange={handleChange} handleSave={handleSave}/>
+            return <Saved setBody={setBody} handleChange={handleChange} handleSave={handleSave} saved={saved} handleDelete={handleDelete} handlePackage={handlePackage} setFormData={setFormData}/>
         }
     }
     return (
         <div className="app">
-            <Header theme={theme} setTheme={setTheme} tokenState={tokenState} setBody={setBody} login={login} logout={logout} setFormData={setFormData} setMyPackage={setMyPackage} setUserData={setUserData} resetStates={resetStates}/> 
+            <Header theme={theme} setTheme={setTheme} tokenState={tokenState} setBody={setBody} login={login} logout={logout} setFormData={setFormData} setMyPackage={setMyPackage} setUserData={setUserData} resetStates={resetStates} handlePackage={handlePackage}/> 
             {content()}
             <Footer />
         </div>

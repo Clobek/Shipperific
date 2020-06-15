@@ -29193,7 +29193,7 @@ var _default = function _default(props) {
   }, props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left",
     onClick: function onClick() {
-      props.setBody('Saved');
+      props.setBody('Saved'), props.handlePackage();
     }
   }, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left",
@@ -29550,9 +29550,30 @@ var _default = function _default(props) {
   }, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit",
     onClick: function onClick() {
-      props.setBody('Saved'), props.handleSave();
+      props.handleSave(), props.handlePackage(), document.getElementById('modal').style.display = 'none';
     }
-  }, "Save"))))));
+  }, "Save"))))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--documents"
+  }, props.saved ? props.saved.map(function (item, index) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item",
+      key: index
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--name"
+    }, "Item Name: ", item.item), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--tracking"
+    }, "Tracking Number: ", item.tracking_number), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--carrier"
+    }, "Carrier: ", item.carrier_code), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--buttons"
+    }, /*#__PURE__*/_react.default.createElement("button", null, "Update"), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        props.handleDelete(item._id), props.handlePackage();
+      }
+    }, "Delete"), /*#__PURE__*/_react.default.createElement("button", null, "Search")));
+  }) : /*#__PURE__*/_react.default.createElement("div", {
+    className: "app__body--documents--none"
+  }, "You do not have any packages saved.")));
 };
 
 exports.default = _default;
@@ -29718,7 +29739,7 @@ var App = function App(props) {
   useEffect(function () {
     transition();
     document.documentElement.setAttribute('data-theme', theme);
-  }); //Resets a few states back to their initial state\\
+  }, [transition]); //Resets a few states back to their initial state\\
 
   var resetStates = function resetStates() {
     setFormData({
@@ -29790,7 +29811,7 @@ var App = function App(props) {
 
   var handleSave = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-      var request, response;
+      var request;
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -29809,29 +29830,118 @@ var App = function App(props) {
 
             case 4:
               request = _context2.sent;
-              _context2.next = 7;
-              return request.json();
-
-            case 7:
-              response = _context2.sent;
-              _context2.next = 13;
+              _context2.next = 10;
               break;
 
-            case 10:
-              _context2.prev = 10;
+            case 7:
+              _context2.prev = 7;
               _context2.t0 = _context2["catch"](1);
               console.error(_context2.t0);
 
-            case 13:
+            case 10:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 10]]);
+      }, _callee2, null, [[1, 7]]);
     }));
 
     return function handleSave() {
       return _ref2.apply(this, arguments);
+    };
+  }(); //Creates a state for saved packages from database\\
+
+
+  var _useState11 = useState(null),
+      _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
+      saved = _useState12[0],
+      setSaved = _useState12[1]; //Requests saved packages from database that match the userID and puts the response in the state\\
+
+
+  var handlePackage = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+      var request, response;
+      return _regenerator.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              event.preventDefault();
+              _context3.prev = 1;
+              _context3.next = 4;
+              return fetch('http://localhost:3000/packages', {
+                method: 'GET',
+                headers: {
+                  'Authorization': "bearer ".concat(tokenState)
+                }
+              });
+
+            case 4:
+              request = _context3.sent;
+              _context3.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context3.sent;
+              _context3.next = 10;
+              return setSaved(response);
+
+            case 10:
+              _context3.next = 15;
+              break;
+
+            case 12:
+              _context3.prev = 12;
+              _context3.t0 = _context3["catch"](1);
+              console.error(_context3.t0);
+
+            case 15:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[1, 12]]);
+    }));
+
+    return function handlePackage() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var handleDelete = /*#__PURE__*/function () {
+    var _ref4 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(id) {
+      return _regenerator.default.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              event.preventDefault();
+              _context4.prev = 1;
+              _context4.next = 4;
+              return fetch("http://localhost:3000/packages/".concat(id), {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': "bearer ".concat(tokenState)
+                }
+              });
+
+            case 4:
+              _context4.next = 9;
+              break;
+
+            case 6:
+              _context4.prev = 6;
+              _context4.t0 = _context4["catch"](1);
+              console.error(_context4.t0);
+
+            case 9:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[1, 6]]);
+    }));
+
+    return function handleDelete(_x) {
+      return _ref4.apply(this, arguments);
     };
   }(); //Variable for our token\\
 
@@ -29847,10 +29957,10 @@ var App = function App(props) {
   }; //Sets a state for the token\\
 
 
-  var _useState11 = useState(null),
-      _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
-      tokenState = _useState12[0],
-      setTokenState = _useState12[1]; //Sets the state of token to either the token in local storage or null\\
+  var _useState13 = useState(null),
+      _useState14 = (0, _slicedToArray2.default)(_useState13, 2),
+      tokenState = _useState14[0],
+      setTokenState = _useState14[1]; //Sets the state of token to either the token in local storage or null\\
 
 
   useEffect(function () {
@@ -29858,24 +29968,23 @@ var App = function App(props) {
   }, []); //Takes the user data and sends it to the login route where it's compared and if accurate returns a token to the user & if there is already a token it sets the variable token to the token in local storage\\
 
   var login = /*#__PURE__*/function () {
-    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+    var _ref5 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
       var request, newToken;
-      return _regenerator.default.wrap(function _callee3$(_context3) {
+      return _regenerator.default.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               if (!window.localStorage.getItem('token')) {
-                _context3.next = 5;
+                _context5.next = 4;
                 break;
               }
 
-              console.log('token exists');
               token = JSON.parse(window.localStorage.getItem('token'));
-              _context3.next = 15;
+              _context5.next = 14;
               break;
 
-            case 5:
-              _context3.next = 7;
+            case 4:
+              _context5.next = 6;
               return fetch('http://localhost:3000/login', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29884,48 +29993,48 @@ var App = function App(props) {
                 }
               });
 
-            case 7:
-              request = _context3.sent;
-              _context3.next = 10;
+            case 6:
+              request = _context5.sent;
+              _context5.next = 9;
               return request.json();
 
-            case 10:
-              newToken = _context3.sent;
-              _context3.next = 13;
+            case 9:
+              newToken = _context5.sent;
+              _context5.next = 12;
               return newToken;
 
-            case 13:
-              token = _context3.sent;
+            case 12:
+              token = _context5.sent;
               window.localStorage.setItem('token', JSON.stringify(token));
 
-            case 15:
-              _context3.next = 17;
+            case 14:
+              _context5.next = 16;
               return setTokenState(token);
 
-            case 17:
+            case 16:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
         }
-      }, _callee3);
+      }, _callee5);
     }));
 
     return function login() {
-      return _ref3.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }(); //Takes the user data and sends it to the sign up route to be stored in the database\\
 
 
   var signUp = /*#__PURE__*/function () {
-    var _ref4 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
+    var _ref6 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6() {
       var request, response;
-      return _regenerator.default.wrap(function _callee4$(_context4) {
+      return _regenerator.default.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               console.log('running function');
-              _context4.prev = 1;
-              _context4.next = 4;
+              _context6.prev = 1;
+              _context6.next = 4;
               return fetch('http://localhost:3000/signup', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29935,31 +30044,30 @@ var App = function App(props) {
               });
 
             case 4:
-              request = _context4.sent;
-              _context4.next = 7;
+              request = _context6.sent;
+              _context6.next = 7;
               return request.json();
 
             case 7:
-              response = _context4.sent;
-              console.log(response);
-              _context4.next = 14;
+              response = _context6.sent;
+              _context6.next = 13;
               break;
 
-            case 11:
-              _context4.prev = 11;
-              _context4.t0 = _context4["catch"](1);
-              console.error(_context4.t0);
+            case 10:
+              _context6.prev = 10;
+              _context6.t0 = _context6["catch"](1);
+              console.error(_context6.t0);
 
-            case 14:
+            case 13:
             case "end":
-              return _context4.stop();
+              return _context6.stop();
           }
         }
-      }, _callee4, null, [[1, 11]]);
+      }, _callee6, null, [[1, 10]]);
     }));
 
     return function signUp() {
-      return _ref4.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }(); //Resets the token variable to essentially nothing, removes the token from the users local storage and then sets the token's state to nothing\\
 
@@ -30001,7 +30109,11 @@ var App = function App(props) {
       return /*#__PURE__*/_react.default.createElement(_Saved.default, {
         setBody: setBody,
         handleChange: handleChange,
-        handleSave: handleSave
+        handleSave: handleSave,
+        saved: saved,
+        handleDelete: handleDelete,
+        handlePackage: handlePackage,
+        setFormData: setFormData
       });
     }
   };
@@ -30018,7 +30130,8 @@ var App = function App(props) {
     setFormData: setFormData,
     setMyPackage: setMyPackage,
     setUserData: setUserData,
-    resetStates: resetStates
+    resetStates: resetStates,
+    handlePackage: handlePackage
   }), content(), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
 };
 
@@ -30053,7 +30166,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41519" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40193" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
