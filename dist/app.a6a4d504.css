@@ -63,7 +63,7 @@ body #app .app__header--name {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-size: calc(1vw + 5vh);
+  font-size: calc(2vw + 3vh);
   font-family: "Montserrat", sans-serif;
   text-shadow: 0 2px 5px var(--shadow);
   -webkit-touch-callout: none;
@@ -406,14 +406,23 @@ body #app .app__body--documents {
   height: 100%;
   overflow: auto;
 }
+body #app .app__body--documents--none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: calc(2vw + 3vh);
+  color: var(--font);
+}
 body #app .app__body--documents--item {
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  border: solid black;
+  border: solid var(--border);
   width: 80%;
-  height: 50%;
+  height: auto;
   margin: 20px 0 0 0;
   background-color: var(--secondary);
   box-shadow: 0 2px 5px var(--shadow);
@@ -426,7 +435,7 @@ body #app .app__body--documents--item--name, body #app .app__body--documents--it
   align-items: center;
   width: 60%;
   height: 25%;
-  font-size: calc(0.50vw + 2vh);
+  font-size: calc(0.75vw + 1.5vh);
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -450,6 +459,44 @@ body #app .app__body--documents--item--buttons button {
   height: 80%;
   width: 10%;
   padding: 2px;
+}
+body #app .app__body--documents--item--buttons button:hover {
+  cursor: pointer;
+}
+body #app .app__body--documents--item--update {
+  width: 100%;
+  border-top: solid var(--border);
+}
+body #app .app__body--documents--item--update--item, body #app .app__body--documents--item--update--tracking, body #app .app__body--documents--item--update--carrier {
+  display: flex;
+  flex-flow: column;
+}
+body #app .app__body--documents--item--update--item label, body #app .app__body--documents--item--update--tracking label, body #app .app__body--documents--item--update--carrier label {
+  display: flex;
+  justify-content: center;
+  font-size: calc(0.75vw + 1.5vh);
+  color: var(--font);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+body #app .app__body--documents--item--update--item input, body #app .app__body--documents--item--update--tracking input, body #app .app__body--documents--item--update--carrier input {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  font-size: calc(0.5vw + 1vh);
+}
+body #app .app__body--documents--item--update--submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #app .app__body--documents--item--update--submit button {
+  font-size: calc(0.75vw + 1.5vh);
+  margin: 5px;
+  padding: 0 5px;
+}
+body #app .app__body--documents--item--update--submit button:hover {
+  cursor: pointer;
 }
 body #app .app__footer {
   display: flex;

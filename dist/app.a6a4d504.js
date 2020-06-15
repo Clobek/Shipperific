@@ -29193,7 +29193,7 @@ var _default = function _default(props) {
   }, props.tokenState ? /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left",
     onClick: function onClick() {
-      props.setBody('Saved'), props.handlePackage();
+      props.resetStates(), props.setBody('Saved'), props.handlePackage();
     }
   }, "Saved") : /*#__PURE__*/_react.default.createElement("div", {
     className: "app__header--nav--left",
@@ -29566,11 +29566,62 @@ var _default = function _default(props) {
       className: "app__body--documents--item--carrier"
     }, "Carrier: ", item.carrier_code), /*#__PURE__*/_react.default.createElement("div", {
       className: "app__body--documents--item--buttons"
-    }, /*#__PURE__*/_react.default.createElement("button", null, "Update"), /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        document.getElementById("key".concat(index)).style.display = 'block';
+      }
+    }, "Update"), /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
         props.handleDelete(item._id), props.handlePackage();
       }
-    }, "Delete"), /*#__PURE__*/_react.default.createElement("button", null, "Search")));
+    }, "Delete"), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        props.setBody('Tracking'), props.handleSearch(item.tracking_number, item.carrier_code);
+      }
+    }, "Search")), /*#__PURE__*/_react.default.createElement("div", {
+      id: "key".concat(index),
+      className: "app__body--documents--item--update",
+      style: {
+        display: 'none'
+      }
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--update--item"
+    }, /*#__PURE__*/_react.default.createElement("label", {
+      htmlFor: "item".concat(index)
+    }, "Item Name:"), /*#__PURE__*/_react.default.createElement("input", {
+      type: "text",
+      maxLength: "30",
+      name: "item",
+      id: "item".concat(index),
+      onChange: props.handleChange
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--update--tracking"
+    }, /*#__PURE__*/_react.default.createElement("label", {
+      htmlFor: "trackingNumber".concat(index)
+    }, "Tracking Number:"), /*#__PURE__*/_react.default.createElement("input", {
+      type: "text",
+      maxLength: "30",
+      name: "tracking_number",
+      id: "trackingNumber".concat(index),
+      onChange: props.handleChange
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--update--carrier"
+    }, /*#__PURE__*/_react.default.createElement("label", {
+      htmlFor: "carrier".concat(index)
+    }, "Carrier:"), /*#__PURE__*/_react.default.createElement("input", {
+      type: "text",
+      maxLength: "15",
+      name: "carrier",
+      id: "carrier".concat(index),
+      onChange: props.handleChange
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "app__body--documents--item--update--submit"
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      type: "submit",
+      onClick: function onClick() {
+        props.handleUpdate(item._id), props.handlePackage(), document.getElementById("key".concat(index)).style.display = 'none';
+      }
+    }, "Save"))));
   }) : /*#__PURE__*/_react.default.createElement("div", {
     className: "app__body--documents--none"
   }, "You do not have any packages saved.")));
@@ -29849,6 +29900,92 @@ var App = function App(props) {
     return function handleSave() {
       return _ref2.apply(this, arguments);
     };
+  }();
+
+  var handleUpdate = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(id) {
+      var request;
+      return _regenerator.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              event.preventDefault();
+              _context3.prev = 1;
+              _context3.next = 4;
+              return fetch("http://localhost:3000/packages/".concat(id), {
+                method: "PUT",
+                body: JSON.stringify(formData),
+                headers: {
+                  'Authorization': "bearer ".concat(tokenState),
+                  "Content-Type": "application/json"
+                }
+              });
+
+            case 4:
+              request = _context3.sent;
+              _context3.next = 10;
+              break;
+
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3["catch"](1);
+              console.error(_context3.t0);
+
+            case 10:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[1, 7]]);
+    }));
+
+    return function handleUpdate(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var handleSearch = /*#__PURE__*/function () {
+    var _ref4 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(tracking, carrier) {
+      var request, response;
+      return _regenerator.default.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              event.preventDefault();
+              _context4.prev = 1;
+              _context4.next = 4;
+              return fetch("http://localhost:3000/api/".concat(tracking, "/").concat(carrier));
+
+            case 4:
+              request = _context4.sent;
+              _context4.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context4.sent;
+              _context4.next = 10;
+              return setMyPackage(response.items[0]);
+
+            case 10:
+              _context4.next = 15;
+              break;
+
+            case 12:
+              _context4.prev = 12;
+              _context4.t0 = _context4["catch"](1);
+              console.error(_context4.t0);
+
+            case 15:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[1, 12]]);
+    }));
+
+    return function handleSearch(_x2, _x3) {
+      return _ref4.apply(this, arguments);
+    };
   }(); //Creates a state for saved packages from database\\
 
 
@@ -29859,15 +29996,15 @@ var App = function App(props) {
 
 
   var handlePackage = /*#__PURE__*/function () {
-    var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+    var _ref5 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
       var request, response;
-      return _regenerator.default.wrap(function _callee3$(_context3) {
+      return _regenerator.default.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               event.preventDefault();
-              _context3.prev = 1;
-              _context3.next = 4;
+              _context5.prev = 1;
+              _context5.next = 4;
               return fetch('http://localhost:3000/packages', {
                 method: 'GET',
                 headers: {
@@ -29876,46 +30013,46 @@ var App = function App(props) {
               });
 
             case 4:
-              request = _context3.sent;
-              _context3.next = 7;
+              request = _context5.sent;
+              _context5.next = 7;
               return request.json();
 
             case 7:
-              response = _context3.sent;
-              _context3.next = 10;
+              response = _context5.sent;
+              _context5.next = 10;
               return setSaved(response);
 
             case 10:
-              _context3.next = 15;
+              _context5.next = 15;
               break;
 
             case 12:
-              _context3.prev = 12;
-              _context3.t0 = _context3["catch"](1);
-              console.error(_context3.t0);
+              _context5.prev = 12;
+              _context5.t0 = _context5["catch"](1);
+              console.error(_context5.t0);
 
             case 15:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
         }
-      }, _callee3, null, [[1, 12]]);
+      }, _callee5, null, [[1, 12]]);
     }));
 
     return function handlePackage() {
-      return _ref3.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
 
   var handleDelete = /*#__PURE__*/function () {
-    var _ref4 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(id) {
-      return _regenerator.default.wrap(function _callee4$(_context4) {
+    var _ref6 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(id) {
+      return _regenerator.default.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               event.preventDefault();
-              _context4.prev = 1;
-              _context4.next = 4;
+              _context6.prev = 1;
+              _context6.next = 4;
               return fetch("http://localhost:3000/packages/".concat(id), {
                 method: 'DELETE',
                 headers: {
@@ -29924,24 +30061,24 @@ var App = function App(props) {
               });
 
             case 4:
-              _context4.next = 9;
+              _context6.next = 9;
               break;
 
             case 6:
-              _context4.prev = 6;
-              _context4.t0 = _context4["catch"](1);
-              console.error(_context4.t0);
+              _context6.prev = 6;
+              _context6.t0 = _context6["catch"](1);
+              console.error(_context6.t0);
 
             case 9:
             case "end":
-              return _context4.stop();
+              return _context6.stop();
           }
         }
-      }, _callee4, null, [[1, 6]]);
+      }, _callee6, null, [[1, 6]]);
     }));
 
-    return function handleDelete(_x) {
-      return _ref4.apply(this, arguments);
+    return function handleDelete(_x4) {
+      return _ref6.apply(this, arguments);
     };
   }(); //Variable for our token\\
 
@@ -29968,23 +30105,23 @@ var App = function App(props) {
   }, []); //Takes the user data and sends it to the login route where it's compared and if accurate returns a token to the user & if there is already a token it sets the variable token to the token in local storage\\
 
   var login = /*#__PURE__*/function () {
-    var _ref5 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
+    var _ref7 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7() {
       var request, newToken;
-      return _regenerator.default.wrap(function _callee5$(_context5) {
+      return _regenerator.default.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
               if (!window.localStorage.getItem('token')) {
-                _context5.next = 4;
+                _context7.next = 4;
                 break;
               }
 
               token = JSON.parse(window.localStorage.getItem('token'));
-              _context5.next = 14;
+              _context7.next = 14;
               break;
 
             case 4:
-              _context5.next = 6;
+              _context7.next = 6;
               return fetch('http://localhost:3000/login', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -29994,47 +30131,47 @@ var App = function App(props) {
               });
 
             case 6:
-              request = _context5.sent;
-              _context5.next = 9;
+              request = _context7.sent;
+              _context7.next = 9;
               return request.json();
 
             case 9:
-              newToken = _context5.sent;
-              _context5.next = 12;
+              newToken = _context7.sent;
+              _context7.next = 12;
               return newToken;
 
             case 12:
-              token = _context5.sent;
+              token = _context7.sent;
               window.localStorage.setItem('token', JSON.stringify(token));
 
             case 14:
-              _context5.next = 16;
+              _context7.next = 16;
               return setTokenState(token);
 
             case 16:
             case "end":
-              return _context5.stop();
+              return _context7.stop();
           }
         }
-      }, _callee5);
+      }, _callee7);
     }));
 
     return function login() {
-      return _ref5.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }(); //Takes the user data and sends it to the sign up route to be stored in the database\\
 
 
   var signUp = /*#__PURE__*/function () {
-    var _ref6 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6() {
+    var _ref8 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee8() {
       var request, response;
-      return _regenerator.default.wrap(function _callee6$(_context6) {
+      return _regenerator.default.wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               console.log('running function');
-              _context6.prev = 1;
-              _context6.next = 4;
+              _context8.prev = 1;
+              _context8.next = 4;
               return fetch('http://localhost:3000/signup', {
                 method: "POST",
                 body: JSON.stringify(userData),
@@ -30044,30 +30181,30 @@ var App = function App(props) {
               });
 
             case 4:
-              request = _context6.sent;
-              _context6.next = 7;
+              request = _context8.sent;
+              _context8.next = 7;
               return request.json();
 
             case 7:
-              response = _context6.sent;
-              _context6.next = 13;
+              response = _context8.sent;
+              _context8.next = 13;
               break;
 
             case 10:
-              _context6.prev = 10;
-              _context6.t0 = _context6["catch"](1);
-              console.error(_context6.t0);
+              _context8.prev = 10;
+              _context8.t0 = _context8["catch"](1);
+              console.error(_context8.t0);
 
             case 13:
             case "end":
-              return _context6.stop();
+              return _context8.stop();
           }
         }
-      }, _callee6, null, [[1, 10]]);
+      }, _callee8, null, [[1, 10]]);
     }));
 
     return function signUp() {
-      return _ref6.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }(); //Resets the token variable to essentially nothing, removes the token from the users local storage and then sets the token's state to nothing\\
 
@@ -30113,7 +30250,9 @@ var App = function App(props) {
         saved: saved,
         handleDelete: handleDelete,
         handlePackage: handlePackage,
-        setFormData: setFormData
+        setFormData: setFormData,
+        handleUpdate: handleUpdate,
+        handleSearch: handleSearch
       });
     }
   };
@@ -30166,7 +30305,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40193" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45087" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

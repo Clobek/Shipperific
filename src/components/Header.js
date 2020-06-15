@@ -14,7 +14,7 @@ export default (props) => {
             </div>
             <div className="app__header--nav">
                     {props.tokenState ? 
-                    <div className="app__header--nav--left" onClick={()=>{props.setBody('Saved'), props.handlePackage()}}>Saved</div> 
+                    <div className="app__header--nav--left" onClick={()=>{props.resetStates(), props.setBody('Saved'), props.handlePackage()}}>Saved</div> 
                     : 
                     <div className="app__header--nav--left" onClick={()=>{props.setBody('Sign Up')}}>Sign Up</div>}
                     {props.tokenState ? 
