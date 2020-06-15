@@ -99,6 +99,33 @@ const App = (props) => {
         }
     }
 
+    const handleUpdate = async (id) =>{
+        event.preventDefault();
+        try{
+            const request = await fetch(`http://localhost:3000/packages/${id}`, {
+                method: "PUT",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Authorization': `bearer ${tokenState}`,
+                    "Content-Type": "application/json"
+                }
+            })
+        } catch(error){
+            console.error(error)
+        }
+    }
+
+    const handleSearch = async (tracking, carrier)=>{
+        event.preventDefault();
+        try{
+            const request = await fetch(`http://localhost:3000/api/${tracking}/${carrier}`)
+            const response = await request.json()
+            await setMyPackage(response.items[0])
+        } catch(error){
+            console.error(error)
+        }
+    }
+
     //Creates a state for saved packages from database\\
     const [saved, setSaved] = useState(null)
 
@@ -207,7 +234,7 @@ const App = (props) => {
         } else if(body === 'Sign In'){
             return <SignIn setBody={setBody} handleUser={handleUser} signIn={login}/>
         } else if(body === 'Saved'){
-            return <Saved setBody={setBody} handleChange={handleChange} handleSave={handleSave} saved={saved} handleDelete={handleDelete} handlePackage={handlePackage} setFormData={setFormData}/>
+            return <Saved setBody={setBody} handleChange={handleChange} handleSave={handleSave} saved={saved} handleDelete={handleDelete} handlePackage={handlePackage} setFormData={setFormData} handleUpdate={handleUpdate} handleSearch={handleSearch}/>
         }
     }
     return (

@@ -36,11 +36,28 @@ export default (props) => {
                             <div className="app__body--documents--item--tracking">Tracking Number: {item.tracking_number}</div>
                             <div className="app__body--documents--item--carrier">Carrier: {item.carrier_code}</div>
                             <div className="app__body--documents--item--buttons">
-                                <button>Update</button>
+                                <button onClick={()=>{document.getElementById(`key${index}`).style.display='block'}}>Update</button>
                                 <button onClick={()=>{
                                     props.handleDelete(item._id), props.handlePackage()
                                 }}>Delete</button>
-                                <button>Search</button>
+                                <button onClick={()=>{props.setBody('Tracking'), props.handleSearch(item.tracking_number, item.carrier_code)}}>Search</button>
+                            </div>
+                            <div id={`key${index}`} className="app__body--documents--item--update" style={{display: 'none'}}>
+                                <div className="app__body--documents--item--update--item">
+                                <label htmlFor={`item${index}`}>Item Name:</label>
+                                <input type="text" maxLength="30" name="item" id={`item${index}`} onChange={props.handleChange}/>
+                                </div>
+                                <div className="app__body--documents--item--update--tracking">
+                                    <label htmlFor={`trackingNumber${index}`}>Tracking Number:</label>
+                                    <input type="text" maxLength="30"  name="tracking_number" id={`trackingNumber${index}`} onChange={props.handleChange}/>
+                                </div>
+                                <div className="app__body--documents--item--update--carrier">
+                                    <label htmlFor={`carrier${index}`}>Carrier:</label>
+                                    <input type="text" maxLength="15" name="carrier" id={`carrier${index}`} onChange={props.handleChange}/>
+                                </div>
+                                <div className="app__body--documents--item--update--submit">
+                                <button type="submit" onClick={()=>{props.handleUpdate(item._id), props.handlePackage(), document.getElementById(`key${index}`).style.display='none'}}>Save</button>
+                                </div>
                             </div>
                         </div>
                     )
