@@ -75,7 +75,7 @@ const App = (props) => {
     const handleTrack = async () =>{
         event.preventDefault();
         try{
-            const request = await fetch(`http://shipperific.herokuapp/api/${formData.tracking_number}/${formData.carrier}`)
+            const request = await fetch(`https://shipperific.herokuapp/api/${formData.tracking_number}/${formData.carrier}`)
             const response = await request.json()
             await setMyPackage(response.items[0])
         } catch(error){
@@ -86,7 +86,7 @@ const App = (props) => {
     const handleSave = async () =>{
         event.preventDefault();
         try{
-            const request = await fetch('http://shipperific.herokuapp/packages', {
+            const request = await fetch('https://shipperific.herokuapp/packages', {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
@@ -106,7 +106,7 @@ const App = (props) => {
     const handlePackage = async ()=>{
         event.preventDefault();
         try{
-            const request = await fetch('http://shipperific.herokuapp/packages', {
+            const request = await fetch('https://shipperific.herokuapp/packages', {
                 method: 'GET',
                 headers: {
                     'Authorization': `bearer ${tokenState}`
@@ -122,7 +122,7 @@ const App = (props) => {
     const handleDelete = async (id)=>{
         event.preventDefault();
         try{
-            await fetch(`http://shipperific.herokuapp/packages/${id}`, {
+            await fetch(`https://shipperific.herokuapp/packages/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `bearer ${tokenState}`
@@ -158,7 +158,7 @@ const App = (props) => {
         if(window.localStorage.getItem('token')) {
             token = JSON.parse(window.localStorage.getItem('token'))
         } else {
-            const request = await fetch('http://shipperific.herokuapp/login', {
+            const request = await fetch('https://shipperific.herokuapp/login', {
             method: "POST",
             body: JSON.stringify(userData),
             headers: {"Content-Type": "application/json"}
@@ -173,7 +173,7 @@ const App = (props) => {
     const signUp = async ()=>{
         console.log('running function')
         try{
-            const request = await fetch('http://shipperific.herokuapp/signup', {
+            const request = await fetch('https://shipperific.herokuapp/signup', {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {"Content-Type": "application/json"}
